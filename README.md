@@ -1,1 +1,2 @@
-# Stage 2018 by Matteo Veronesi
+# JISP by Matteo Veronesi
+Jira Issue Simple Panel
