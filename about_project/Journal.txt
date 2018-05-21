@@ -4,6 +4,7 @@
   10:00 - 10:40 installazione nodejs
   10:40 - 13:00 level 1-2-3 nodejs
   14:00 - 15:20 level 4-5 nodejs
-  15:20 - 16:00 esercitazzi su expressjs
-  16:00 - buttanza della repo su gits
-  
+  15:20 - 16:00 esercitazzi su nodejs
+  16:00 - 17:00 buttanza della repo su gh e analisi progetto
+  17:00 - 18:00 altri esercitazzi su nodejs
+
