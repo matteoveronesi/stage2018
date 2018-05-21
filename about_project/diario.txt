@@ -1,0 +1,9 @@
+21/05/2018
+  09:00 - 09:30 introduzione e preparazione
+  09:30 - 10:00 problemi audio
+  10:00 - 10:40 installazione nodejs
+  10:40 - 13:00 level 1-2-3 nodejs
+  14:00 - 15:20 level 4-5 nodejs
+  15:20 - 16:00 esercitazzi su expressjs
+  16:00 - buttanza della repo su gits
+  
