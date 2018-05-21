@@ -1,10 +1,10 @@
 USER STORY
 
-- Aggiungere una issue																	6
-- Modificare una issue															  	6
-- Eliminare una issue																		6
-- Visualizzare lo stato di completamento di una issue		6
-- Autenticazione con Jira                               5
-- Grafica minima per testare la parte ui								3
-- Grafica avanzata e carina (anche personalizzabile)		7
-- Funzioni aggiuntive future (??)
+- 6 - Aggiungere una issue
+- 6 - Modificare una issue	
+- 6 - Eliminare una issue		
+- 6 - Visualizzare lo stato di completamento di una issue	
+- 5 - Autenticazione con Jira  
+- 3 - Grafica minima per testare la parte ui
+- 7 - Grafica avanzata e carina (anche personalizzabile)
+- 0 - Funzioni aggiuntive future (??)
