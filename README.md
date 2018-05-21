@@ -1,2 +1,2 @@
-# JISP by Matteo Veronesi
-Jira Issue Simple Panel
+# <NAME_HERE> by Matteo Veronesi
+Jira Issue Simple Control Panel
