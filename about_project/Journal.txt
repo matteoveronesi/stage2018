@@ -1,4 +1,5 @@
-21/05/2018
+21/05/2018 [DAY ONE]
+
   09:00 - 09:30 introduzione e preparazione
   09:30 - 10:00 problemi audio
   10:00 - 10:40 installazione nodejs
@@ -7,4 +8,5 @@
   15:20 - 16:00 esercitazzi su nodejs
   16:00 - 17:00 buttanza della repo su gh e analisi progetto
   17:00 - 18:00 altri esercitazzi su nodejs
+
 
