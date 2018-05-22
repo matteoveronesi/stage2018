@@ -26,6 +26,13 @@ https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.ht
 
 EXPRESS TUTORIAL
 
+https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
+
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment
 
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/skeleton_website
+
+NPM APPROVED
+
+https://www.npmjs.com/package/nodemon
+
