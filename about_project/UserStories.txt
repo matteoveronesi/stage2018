@@ -1,4 +1,4 @@
-USER STORY
+USER STORIES
 
 - 6 - Aggiungere una issue
 - 6 - Modificare una issue	
