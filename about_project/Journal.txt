@@ -10,3 +10,6 @@
   17:00 - 18:00 altri esercitazzi su nodejs
 
 
+22/05/2018 [DAY TWO]
+
+  09:00 - 11:30 esercitozzi su node ed express
