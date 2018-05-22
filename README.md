@@ -1,2 +1,2 @@
-# <NAME_HERE> by Matteo Veronesi
+# <NAME> by Matteo Veronesi
 Jira Issue Simple Control Panel
