@@ -13,3 +13,4 @@
 22/05/2018 [DAY TWO]
 
   09:00 - 11:30 esercitozzi su node ed express
+  11:30 - 13:00 esercitanza su express
