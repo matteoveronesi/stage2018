@@ -18,3 +18,7 @@
   14:30 - 16:20 level 3-4-5 express
   16:20 - 18:00 ricerche varie su express,rest,..
   
+  
+23/05/2018 [DAY THREE]  
+
+  09:00 - 11:00 creazione di un web server base
