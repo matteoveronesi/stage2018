@@ -1,0 +1,16 @@
+{
+  "name": "stage2018",
+  "version": "1.0.0",
+  "description": "nope",
+  "main": "app.js",
+  "scripts": {
+    "server": "app.js"
+  },
+  "author": "Matteo Veronesi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5",
+    "pug": "^2.0.3"
+  }
+}
