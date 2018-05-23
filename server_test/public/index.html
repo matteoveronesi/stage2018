@@ -7,14 +7,21 @@
 <body>
   <h1>Cities</h1>
 
-  <form>
-  <legend>New City</legend><br/>
+  <form id="add_form">
+  <legend>Add City</legend>
   <input name="name" placeholder="Name"><br/>
   <input name="description" placeholder="Description"><br/>
-  <input type="Submit" value="Aggiungi">
+  <input type="Submit" value="Add">
   </form>
-  <br/>
-  <legend>All Cities</legend>
+
+  <form id="edit_form"><br/>
+  <legend>Edit City</legend>
+  <input name="name" placeholder="Name"><br/>
+  <input name="description" placeholder="Description"><br/>
+  <input type="Submit" value="Edit">
+  </form>
+
+  <h3>All Cities</h3>
   <ul class='city-list'></ul>
 
   <script src="jquery.js"></script>

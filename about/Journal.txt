@@ -21,5 +21,7 @@
   
 23/05/2018 [DAY THREE]  
 
-  09:00 - 11:00 creazione di un web server base (aggiunta ed eliminazione ma non salva)
+  09:00 - 11:00 creazione di un web server base (aggiunta ed eliminazione)
   11:00 - 13:00 aggiunta della modifica al web server
+  14:00 - 17:30 refactor del web server (inutile)
+  17:30 - 18:00 creazione di un server statico con pug

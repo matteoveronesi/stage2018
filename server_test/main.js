@@ -8,13 +8,13 @@ var app = express();
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
-var cities = ['Lotopia', 'Caspiana', 'Indigo','Banana'];
+var cities = ['Lotopia', 'Caspiana', 'Indigo','Banane'];
 var createCity = function(name, description){
   cities[name] = description;
   return name;
 };
 
-app.use(express.static('public')); // usa la directory public
+app.use(express.static('public'));
 
 app.get('/cities', function(request, response)
 {
@@ -22,7 +22,8 @@ app.get('/cities', function(request, response)
 });
 
 app.post('/cities', parseUrlencoded, function (request, response) {
-  if(request.body.description.length > 4){
+  console.log(request.body);
+  if(request.body.description.length > 0){
     var city = createCity(request.body.name, request.body.description);
     response.status(201).json(city);
   }else{
@@ -30,9 +31,14 @@ app.post('/cities', parseUrlencoded, function (request, response) {
   }
 });
 
+app.post('/cities/:name', parseUrlencoded, function (request, response) {
+  console.log();
+  response.sendStatus(200);
+});
+
 app.delete('/cities/:name', function(request, response) {
-delete cities[request.cityName];
-response.sendStatus(200);
+  delete cities[request.cityName];
+  response.sendStatus(200);
 });
 
 app.listen(8080);
