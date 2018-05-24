@@ -1,0 +1,26 @@
+/*
+.head-list{
+  background: rgba(255, 255, 255, 0);
+}
+
+.body-list{
+  z-index: -1;
+}
+*/
+.head-pos{
+  margin-top: 74px;
+}
+
+.state-0{
+  color: blue;
+}
+.state-1{
+  color: red;
+}
+.state-2{
+  color: green;
+}
+
+small{
+  font-size: 11px;
+}

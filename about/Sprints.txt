@@ -2,4 +2,9 @@ Sprints
 
  23/05/2018 [DAY 3]
 
-  - Realizzare un webserver base
+  - Realizzare un webserver base [fatto]
+
+ 24/05/2018 [DAY 4]
+
+  - Implementare un html statico con pug
+  - Aggiungere delle chiamate base con ajax

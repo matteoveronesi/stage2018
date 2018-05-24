@@ -1,4 +1,4 @@
-21/05/2018 [DAY ONE]
+21/05/2018 [DAY 1]
 
   09:00 - 09:30 introduzione e preparazione
   09:30 - 10:00 problemi audio
@@ -10,7 +10,7 @@
   17:00 - 18:00 altri esercitazzi su node
 
 
-22/05/2018 [DAY TWO]
+22/05/2018 [DAY 2]
 
   09:00 - 11:30 esercitozzi su node ed express
   11:30 - 13:00 level 1-2 express
@@ -19,9 +19,15 @@
   16:20 - 18:00 ricerche varie su express,rest,..
   
   
-23/05/2018 [DAY THREE]  
+23/05/2018 [DAY 3]  
 
   09:00 - 11:00 creazione di un web server base (aggiunta ed eliminazione)
   11:00 - 13:00 aggiunta della modifica al web server
   14:00 - 17:30 refactor del web server (inutile)
   17:30 - 18:00 creazione di un server statico con pug
+
+24/05/2018 [DAY 4]
+
+  09:00 - 12:00 proseguimento del lavoro sul server statico con pug
+  12:00 - 13:00 scrittura html statico (no pug) come mock-up di base
+  14:00 - 18:00 mock-up client

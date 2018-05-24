@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<title>JIRA Issues Panel</title>
+	<link rel="icon" href="icon.png">
+	<script src="jquery.js"></script>
+	<script src="bs/js/bootstrap.js"></script>
+	<script src="client.js"></script>
+	<link rel="stylesheet" type="text/css" href="bs/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+    <img src="icon.png" width="40px" height="40px">
+    <a class="navbar-brand"><b>JIRA Issues Panel</b></a>
+  </nav>
+
+  <div class="container-fluid head-pos">
+    <div class="row">
+      <div class="col"><b>Key</b></div>
+      <div class="col"><b>Issue</b></div>
+      <div class="col"><b>State</b></div>
+      <div class="col"><input type='submit' value='New' class='float-right' data-toggle="collapse" data-target="#collapsibleNavbar"></div>
+    </div>
+    <div class="collapse navbar-collapse row" id="collapsibleNavbar">
+      <div class="col"><input type='text' placeholder='Nome Key' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Nome Issue' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='Add' class='float-right' data-toggle="collapse" data-target="#collapsibleNavbar"></div>
+    </div>
+    <hr>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-2' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 2' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-1' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 1' class='form-control-plaintext'></div>
+      <div class="col state-1">Wip</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-4' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 4' class='form-control-plaintext'></div>
+      <div class="col state-1">Wip</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-2">Done</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-2">Done</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-1">Wip</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-2">Done</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-1">Wip</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-2">Done</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-1">Wip</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-7' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 7' class='form-control-plaintext'></div>
+      <div class="col state-0">Todo</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col"><input type='text' placeholder='TODO-3' class='form-control-plaintext'></div>
+      <div class="col"><input type='text' placeholder='Fare la cosa 3' class='form-control-plaintext'></div>
+      <div class="col state-2">Done</div>
+      <div class="col"><input type='submit' value='X' class='btn close btn-sm'></div>
+    </div>
+  </div>
+</body>
+</html>

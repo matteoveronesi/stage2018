@@ -1,24 +1,38 @@
 html
   head
-    title='Static Server'
+    title='Jira Issues Panel'
+    script(src='jquery.js')
+    script(src='bs/js/bootstrap.js')
+    script(src='client.js')
+    link(rel='stylesheet' href='bs/css/bootstrap.css')
+    link(rel='stylesheet' href='style.css')
+    link(rel='icon' href='ico.png')
 
   body
-    h1='Issue Panel'
+    h1='Issues'
 
     form
-      input(
-        type='text'
-        placeholder='Inserisci issue'
-      )
-      input(
-        type='submit'
-        value='aggiungi'
-      )
+      input(type='text' placeholder='Inserisci una issue')
+      input(type='submit' value='aggiungi')
 
-    div
+    table(class='table')
       - var i = 0;
-      for value, index in issues
+      for state, issue in issues
         tr(id='id'+i++)
-          h3=index
-          p=value
-          hr
+          td
+            input(
+              type='text'
+              placeholder=issue
+              class='col-3 form-control-plaintext float-left'
+            )
+            input(
+              type='submit'
+              value='X'
+              class='btn close btn-sm float-right'
+            )
+            br
+            input(
+              type='submit'
+              value=state
+              class='btn btn-primary btn-sm'
+            )
