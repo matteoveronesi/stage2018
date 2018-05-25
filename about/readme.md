@@ -18,6 +18,8 @@ https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.ht
 
 EXPRESS & NODE TUTORIAL
 
+https://www.w3schools.com/jquery/jquery_ajax_load.asp
+
 https://www.w3schools.com/nodejs/
 
 https://expressjs.com/

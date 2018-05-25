@@ -31,3 +31,9 @@
   09:00 - 12:00 proseguimento del lavoro sul server statico con pug
   12:00 - 13:00 scrittura html statico (no pug) come mock-up di base
   14:00 - 18:00 mock-up client
+
+25/05/2018 [DAY 5]
+
+  09:00 - 13:00 progettazione nuova versione del mock-up
+  14:00 - 17:00 continuo nuovo mock-up
+  17:00 - 18:00 inizio chiamate node <-> client
