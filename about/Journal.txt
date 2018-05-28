@@ -35,5 +35,9 @@
 25/05/2018 [DAY 5]
 
   09:00 - 13:00 progettazione nuova versione del mock-up
-  14:00 - 17:00 continuo nuovo mock-up
-  17:00 - 18:00 inizio chiamate node <-> client
+  14:00 - 18:00 continuo nuovo mock-up
+
+28/05/2018 [DAY 6]
+
+  09:00 - 13:00 revisione e "get" di dati statici da node
+  14:00 - 18:00 tentativo di implementare il "post" fallito miseramente 

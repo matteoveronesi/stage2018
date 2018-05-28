@@ -2,13 +2,17 @@ Sprints
 
  23/05/2018 [DAY 3]
 
-  - Realizzare un webserver base [fatto]
+  - Realizzare un webserver base [DONE]
 
  24/05/2018 [DAY 4]
 
-  - Implementare un html statico con pug [no]
-  - Aggiungere delle chiamate base con ajax [no]
+  - Implementare un html statico con pug [CANCELLED]
+  - Aggiungere delle chiamate base con ajax [CANCELLED]
 
  25/05/2018 [DAY 5]
 
-  - Creare un mokup statico fatto bene [fatto]
+  - Creare un mokup statico fatto bene [DONE]
+
+ 28/05/2018 [DAY 6]
+
+  - Implementazione della comunicazione client <-> node con dati statici [BL]

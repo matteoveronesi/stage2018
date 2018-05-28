@@ -1,38 +1,45 @@
-html
-  head
-    title='Jira Issues Panel'
-    script(src='jquery.js')
-    script(src='bs/js/bootstrap.js')
-    script(src='client.js')
-    link(rel='stylesheet' href='bs/css/bootstrap.css')
-    link(rel='stylesheet' href='style.css')
-    link(rel='icon' href='ico.png')
-
-  body
-    h1='Issues'
-
-    form
-      input(type='text' placeholder='Inserisci una issue')
-      input(type='submit' value='aggiungi')
-
-    table(class='table')
-      - var i = 0;
-      for state, issue in issues
-        tr(id='id'+i++)
-          td
-            input(
-              type='text'
-              placeholder=issue
-              class='col-3 form-control-plaintext float-left'
-            )
-            input(
-              type='submit'
-              value='X'
-              class='btn close btn-sm float-right'
-            )
-            br
-            input(
-              type='submit'
-              value=state
-              class='btn btn-primary btn-sm'
-            )
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title JIRA Issues Panel
+  link(rel='icon' href='icon.png')
+  script(src='jquery.js')
+  script(src='client.js')
+  link(rel='stylesheet' type='text/css' href='icons.css')
+  link(rel='stylesheet' type='text/css' href='w3.css')
+  link(rel='stylesheet' type='text/css' href='style.css')
+  link(rel='stylesheet' type='text/css' href='w3-metro.css')
+header.w3-top
+  .w3-metro-dark-blue.w3-padding
+    img(src='icon.png' width='26px' height='26px')
+    a
+      b JIRA Issues Panel
+    .w3-bar-item.w3-right
+      i.w3-dropdown-click.w3-xlarge.material-icons.i(onclick='display_dropdown(1)') add
+      i.w3-dropdown-click.w3-xlarge.material-icons.i(onclick='display_dropdown(2)') settings
+  .w3-white
+    table.w3-table.w3-card-2
+      tr#iadd.w3-dropdown-content.w3-card-2.add_tr
+        td.td-key
+          input.w3-input(type='text' placeholder='Key Issue')
+        td.td-newname
+          input.w3-input(type='text' placeholder='Nome Issue')
+        td.td-act
+          input.w3-button.w3-round.w3-metro-dark-blue.w3-hover-blue(onclick='display_dropdown(1)' type='submit' value='Add')
+      tr
+        th.td-key Key
+        th.td-name Issue
+        th.td-stat Status
+        th.td-act Azioni
+.table-margin
+  table.w3-table
+    tr
+      td.td-key
+        input.w3-input.w3-white(type='text' placeholder='TODO-6' disabled='')
+      td.td-name
+        input.w3-input.w3-white(type='text' placeholder='Finire il progetto di Stage' disabled='')
+      td.td-stat Todo
+      td.td-act
+        i.material-icons mode_edit
+        i.material-icons delete

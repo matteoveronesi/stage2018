@@ -1,0 +1,34 @@
+.table-margin{
+  margin-top: 85px;
+}
+
+i:hover, .i:hover{
+  cursor: pointer;
+  color:lightblue;
+  text-shadow:2px 2px 4px #2b5797;
+}
+
+.i:hover{
+  background-color: #2b5797;
+  text-shadow:2px 2px 4px #2b5797;
+}
+
+.td-key{
+  width: 110px;
+}
+
+.td-name{
+  width: 260px;
+}
+
+.td-stat{
+  width: 0px;
+}
+
+.td-act{
+  width: 69px;
+}
+
+.td-newname{
+  width: 330px;
+}
