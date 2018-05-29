@@ -16,3 +16,7 @@ Sprints
  28/05/2018 [DAY 6]
 
   - Implementazione della comunicazione client <-> node con dati statici [BL]
+
+ 29/05/2018 [DAY 7]
+
+  - Implementazione della comunicazione client <-> node con dati statici [FATTO]

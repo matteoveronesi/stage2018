@@ -41,3 +41,9 @@
 
   09:00 - 13:00 revisione e "get" di dati statici da node
   14:00 - 18:00 tentativo di implementare il "post" fallito miseramente 
+
+29/05/2018 [DAY 7]
+
+  09:00 - 13:00 refactor routes e implementazione modifica e visualizzazione statica
+  14:00 - 16:30 implementazione eliminazione statica
+  16.30 - implementazione del cambio di status 

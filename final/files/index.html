@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>JIRA Issues Panel</title>
-	<link rel="icon" href="icon.png">
+	<link rel="icon" href="icon.ico">
 	<script src="jquery.js"></script>
 	<script src="client.js"></script>
 	<link rel="stylesheet" type="text/css" href="icons.css">
@@ -14,7 +14,7 @@
 <body>
   <header class="w3-top">
 		<div class="w3-metro-dark-blue w3-padding">
-			<img src="icon.png" width="26px" height="26px">
+			<img src="logo.png" width="26px" height="26px">
 	    <a class=""><b>JIRA Issues Panel</b></a>
 			<div class="w3-bar-item w3-right">
 				<i class="w3-dropdown-click w3-xlarge material-icons i show-add">add</i>
@@ -25,27 +25,19 @@
 		<div class="w3-white">
 			<table class="w3-table w3-card-2">
 				<tr id="iadd" class="w3-dropdown-content w3-card-2 add_tr">
-					<td class="td-key"><input class="w3-input" type="text" placeholder="Key Issue"></td>
-					<td class="td-newname" ><input class="w3-input" type="text" placeholder="Nome Issue"></td>
-					<td class="td-act"><input class="w3-button w3-round w3-metro-dark-blue w3-hover-blue show-add" type="submit" value="Add"></td>
+					<td class="td-key"><input id="new-key" class="w3-input" type="text" placeholder="Key"></td>
+					<td><input id="new-name" class="td-new-name w3-input" type="text" placeholder="Nome"></td>
+					<td><input id="new-add" class="w3-button w3-round w3-metro-dark-blue w3-hover-blue" type="submit" value="Add"></td>
 				</tr>
 				<tr>
 					<th class="td-key">Key</th>
-					<th class="td-name">Issue</th>
-					<th class="td-stat">Status</th>
-					<th class="td-act">Azioni</th>
+					<th class="w3-left">Issue</th>
+					<th class="w3-right">Azioni</th>
 				</tr>
 			</table>
-		 </div>
+		</div>
   </header>
 
-	<table class="table-margin w3-table">
-		<tr>
-			<td class="td-key"><input class="w3-input w3-white" type="text" placeholder="TODO-6" disabled></td>
-			<td class="td-name"><input class="w3-input w3-white" type="text" placeholder="Finire il progetto di Stage" disabled></td>
-			<td class="td-stat">Todo</td>
-			<td class="td-act"><i class="material-icons">mode_edit</i> <i class="material-icons">delete</i></td>
-		</tr>
-	</table>
+	<table id="content-table" class="table-margin w3-table"></table>
 </body>
 </html>
