@@ -1,5 +1,6 @@
 .table-margin{
   margin-top: 85px;
+  margin-bottom: 70px;
 }
 
 i:hover, .i:hover{
@@ -10,7 +11,14 @@ i:hover, .i:hover{
 
 .i:hover{
   background-color: #2b5797;
-  text-shadow:2px 2px 4px #2b5797;
+  text-shadow:2px 2px 4px lightblue;
+}
+
+.Todo{
+  color: blue;
+}
+.Done{
+  color: green;
 }
 
 .td-key{
@@ -18,17 +26,13 @@ i:hover, .i:hover{
 }
 
 .td-name{
-  width: 260px;
+  width: 265px;
 }
 
-.td-stat{
+.td-status{
   width: 0px;
 }
 
-.td-act{
-  width: 69px;
-}
-
-.td-newname{
-  width: 330px;
+.td-new-name{
+  width: 310px;
 }

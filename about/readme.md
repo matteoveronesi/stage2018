@@ -32,6 +32,8 @@ NPM APPROVED
 
 https://www.npmjs.com/package/nodemon
 
+https://www.npmjs.com/package/colors
+
 HTML TO PUG
 
 https://html-to-pug.com/

@@ -1,11 +1,12 @@
 const express = require('express');
-const mainRoute = require('./routes/index');
-const issueRoute = require('./routes/issue');
+const colors = require('colors');
+const route = require('./routes/index');
 const app = express();
 
 app.use(express.static('files'));
 
-app.use('/', mainRoute);
-app.use('/:name', issueRoute);
+//app.use('/', mainRoute);
+app.get('/', (req, res) => res.render('index'));
+app.use('/:name', route);
 
-app.listen(9000, () => console.log('Listening on port 9000.'));
+app.listen(8080, () => console.log('[app.js] listening on localhost:8080'.yellow));
