@@ -1,0 +1,30 @@
+function getIssues(){
+	request.get({
+		url: 'http://stage.gnet.it/rest/api/latest/search?jql=project=TODO&maxResults=200',
+	    auth: login
+	}, function (err, res, body){
+
+		console.log("SETTING");
+		setData(body);
+		console.log(res.statusCode);
+		if (res.errorMessages) console.log(colors.red("# ERROR: %s"), res);
+	});
+}
+getIssues();
+
+router.get('/issues', function(req, res){
+	++count;
+	console.log("\n# ID "+count);
+    console.log("# REQUEST:".cyan);
+	console.log("# type: GET(load)");
+    console.log("# url: "+req.headers.host+req.originalUrl);
+	console.log("# RESPONSE:".cyan);
+
+	console.log("START");
+	getIssues();
+    if (data) {
+	console.log("END");
+		res.send(extractIssues());
+		console.log("# status: 200 (sent)");
+	}
+});

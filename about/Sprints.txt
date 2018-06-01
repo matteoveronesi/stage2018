@@ -36,4 +36,4 @@ Sprints
  01/06/2018 [DAY 10]
 
   - Implementare la modifica dello status [FATTO]
-  - Refactorizzare e controllare il codice/ui []
+  - Primo refactor + controllo del codice/ui []

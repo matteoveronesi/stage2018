@@ -67,3 +67,4 @@
   09:00 - 09:30 sistemanza del cambio di issue
   09:30 - 10:00 risoluzione problemi di git
   10:00 - 13:00 refactor routes e node
+  14:00 - 16:30 refactor js client e risoluzione problemi di async

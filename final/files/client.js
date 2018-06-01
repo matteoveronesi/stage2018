@@ -1,14 +1,12 @@
 $(document).ready(function(){
-    refresh();
-
-    //setInterval(()=>$("#content-table").load("/issues"), 30000);
-
+    refresh(1);
+    
     $(".show-add").click(function(){
         $("#iadd").toggle(100);
     });
 
     $("#load").click(function(){
-        refresh();
+        refresh(1);
     });
 
     $("#new-add").click(function(){
@@ -21,8 +19,7 @@ $(document).ready(function(){
             	type: "POST",
                 url: "/rest/add",
                 data: {/*"key": key.val(),*/"summary": summary.val(),"status": status}
-            }).done(setTimeout(refresh(), 5000));
-
+            }).done(refresh(2));
 
             $("#iadd").toggle(100);
             //key.prop("value", "");
@@ -32,8 +29,11 @@ $(document).ready(function(){
     });
 });
 
-function refresh(){
+function refresh(i){
+    $("#logo").prop("src", "spin.svg");
     $("#content-table").load("/rest/issues");
+    setTimeout(function(){$("#logo").prop("src", "logo.png");
+    }, i*1000);
 }
 
 function status(n){
@@ -53,18 +53,17 @@ function edit(n){
     var status_name = "";
 
     if (status.text() === "check_box")
-        status_name = "21";
+        status_name = "21"; //done
     else
-        status_name = "51";
+        status_name = "51"; //todo
 
-    if(summary.val().length > 0){
+    if(summary.val().length > 0 && summary.val() != summary.prop("placeholder")){
       	$.ajax({
       	     type: "PUT",
              url: "/rest/edit",
              data: {"key": key.text(),"summary": summary.val(),"status": status_name}
-      	}).done(setTimeout(refresh(), 4000));
+      	}).done(refresh(2));
 
-        summary.prop("value", "");
     }
     else alert("Controlla i dati inseriti.");
 }
@@ -75,5 +74,5 @@ function del(n){
          type: "DELETE",
          url: "/rest/delete",
          data: {"key": key}
-    }).done(setTimeout(refresh(), 5000));
+    }).done(refresh(2));
 }
