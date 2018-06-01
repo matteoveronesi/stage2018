@@ -1,11 +1,14 @@
 $(document).ready(function(){
-    $("#content-table").load("/issues");
+    refresh();
+
+    //setInterval(()=>$("#content-table").load("/issues"), 30000);
 
     $(".show-add").click(function(){
         $("#iadd").toggle(100);
     });
+
     $("#load").click(function(){
-        $("#content-table").load("/issues");
+        refresh();
     });
 
     $("#new-add").click(function(){
@@ -16,11 +19,10 @@ $(document).ready(function(){
         if(/*key.val().length > 0 && */summary.val().length > 0){
             $.ajax({
             	type: "POST",
-                url: "/new",
+                url: "/rest/add",
                 data: {/*"key": key.val(),*/"summary": summary.val(),"status": status}
-            }).done(
-                //alert("Richiesta effettuata.\n\ntype: POST\nquery: (add)"));
-                alert(response));
+            }).done(setTimeout(refresh(), 5000));
+
 
             $("#iadd").toggle(100);
             //key.prop("value", "");
@@ -29,6 +31,10 @@ $(document).ready(function(){
         else alert("Controlla i dati inseriti.");
     });
 });
+
+function refresh(){
+    $("#content-table").load("/rest/issues");
+}
 
 function status(n){
     var status = $("#"+n).find(".td-status").find("i");
@@ -47,16 +53,16 @@ function edit(n){
     var status_name = "";
 
     if (status.text() === "check_box")
-        status_name = "Done";
+        status_name = "21";
     else
-        status_name = "Todo";
+        status_name = "51";
 
     if(summary.val().length > 0){
       	$.ajax({
       	     type: "PUT",
-             url: "/"+n,
+             url: "/rest/edit",
              data: {"key": key.text(),"summary": summary.val(),"status": status_name}
-      	}).done(alert("Richiesta effettuata.\n\ntype: PUT\nquery: (edit)"));
+      	}).done(setTimeout(refresh(), 4000));
 
         summary.prop("value", "");
     }
@@ -67,7 +73,7 @@ function del(n){
     var key = $("#"+n).find(".td-key").find("a").text();
     $.ajax({
          type: "DELETE",
-         url: "/"+n,
+         url: "/rest/delete",
          data: {"key": key}
-    }).done(/*alert("Richiesta effettuata.\n\ntype: DELETE\nquery: (delete)")*/);
+    }).done(setTimeout(refresh(), 5000));
 }

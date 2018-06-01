@@ -1,12 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-//const jsonFind = require('json-find');
+const colors = require('colors');
 const router = express.Router();
 const parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
 var data; //JSON delle issue del progetto
 var table; //html di output delle issue
+var count = 0; //contatore dei messaggi
+var login = {
+	'user': '99mv66',
+	'pass': 'stage.2018'
+};
 
 function extractIssues(){
 	table = "";
@@ -27,92 +32,90 @@ function extractIssues(){
 	return table;
 }
 
-//////////////////////////////////////////////////////////
-
 function setData(body){
 	data = JSON.parse(body);
 }
 
 function getIssues(){
-	request.get('http://stage.gnet.it/rest/api/latest/search?jql=project=TODO&maxResults=200', {
-	    'auth': {
-	        'user': '99mv66',
-	        'pass': 'stage.2018'
-	    }
+	request.get({
+		url: 'http://stage.gnet.it/rest/api/latest/search?jql=project=TODO&maxResults=200',
+	    auth: login
 	}, function (err, res, body){
-	    setData(body);
+		setData(body);
+		if (res.errorMessages) console.log(colors.red("# ERROR: %s"), res);
 	});
 }
 getIssues();
-/*
-router.all('/', function(req, res, next){
-    table = "";
-    next();
-});
-*/
-router.get('/', function(req, res){
-    console.log("\n# REQUESTED <LOAD> CALL");
+
+router.get('/issues', function(req, res){
+	++count;
+	console.log("\nMESSAGE #"+count);
+    console.log("# REQUEST:".cyan);
+	console.log("# type: GET(load)");
+    console.log("# url: "+req.headers.host+req.originalUrl);
+	console.log("# RESPONSE:".cyan);
+
 	getIssues();
-    res.send(extractIssues());
-    res.status(200);
+    if (data) {
+		res.send(extractIssues());
+		console.log("# status: 200 (sent)");
+	}
 });
 
-router.put('/', parseUrlencoded, function(req, res){
-    console.log("\n# REQUESTED <EDIT> CALL");
-    console.log(
-        "# key: "+req.body.key+
-        "# summary: "+req.body.summary+
-        "\n# status: "+req.body.status
-    );
+router.put('/edit', parseUrlencoded, function(req, res){
+	++count;
+	console.log("\nMESSAGE #"+count);
+    console.log("# REQUEST:".cyan);
+	console.log("# type: PUT(edit)");
+	console.log("# url: "+req.headers.host+req.originalUrl);
+    console.log("# key: "+req.body.key);
+    console.log("# summary: "+req.body.summary);
+    console.log("# status: "+req.body.status);
+	console.log("# RESPONSE:".cyan);
 
 	request.post({
 		url: 'http://stage.gnet.it/rest/api/latest/issue/'+req.body.key+'/transitions',
-		auth:{
-	        'user': '99mv66',
-	        'pass': 'stage.2018'
-		},
+		auth: login,
 		json: {
 			"transition": {
-						"id": "21"
+						"id": req.body.status
 			}
 		}
-	}, function(error, response, body){
-		console.log("post: "+error+"\n"+JSON.stringify(body));
+	}, function(err, res, body){
+		console.log("# (FIELD)status:");
+		if (err) console.log(colors.red("# -ERROR: %s"), err);
+		else console.log("# -status: 200 (edited)");
 	});
-
+	console.log(req.body.summary);
 	request.put({
 		url: 'http://stage.gnet.it/rest/api/latest/issue/'+req.body.key,
-		auth:{
-	        'user': '99mv66',
-	        'pass': 'stage.2018'
-		},
+		auth: login,
 		json: {
 	    "fields": {
-	        "summary": req.body.summary/*,
-			"status": {
-				"id": "10000"
-			}*/
+	        "summary": req.body.summary
    		}
 	}
-	}, function(error, response, body){
-		console.log("put: "+error);
+	}, function(err, res, body){
+		console.log("# (FIELD)summary:");
+		if (err) console.log(colors.red("# -ERROR: %s"), err);
+		else console.log("# -status: 200 (edited)");
 	});
 });
 
-router.post('/', parseUrlencoded, function(req, res){
-    console.log("\n# REQUESTED <ADD> CALL");
-    console.log(
-        //"# key: "+req.body.key+
-        "# summary: "+req.body.summary//+
-        //"\n# status: "+req.body.status
-    );
+router.post('/add', parseUrlencoded, function(req, res){
+	++count;
+	console.log("\nMESSAGE #"+count);
+    console.log("# REQUEST:".cyan);
+	console.log("# type: POST(add)");
+    console.log("# url: "+req.headers.host+req.originalUrl);
+    console.log("# key: "+req.body.key);
+    console.log("# summary: "+req.body.summary);
+    console.log("# status: "+req.body.status);
+	console.log("# RESPONSE:".cyan);
 
 	request.post({
 		url: 'http://stage.gnet.it/rest/api/latest/issue',
-		auth:{
-	        'user': '99mv66',
-	        'pass': 'stage.2018'
-		},
+		auth: login,
 		json: {
 	    "fields": {
 	        "project":
@@ -126,27 +129,28 @@ router.post('/', parseUrlencoded, function(req, res){
 	        }
    		}
 	}
-	}, function(error, response, body){
-		console.log(body);
+	}, function(err, res, body){
+		if (err) console.log(colors.red("# ERROR: %s"), err);
+		else console.log("# status: 201 (created)");
 	});
-
-	res.send(extractIssues());
-    res.status(200);
 });
 
-router.delete('/', parseUrlencoded, function(req, res){
-    console.log("\n# REQUESTED <DELETE> CALL");
-    //console.log("# key: "+req.body.key);
+router.delete('/delete', parseUrlencoded, function(req, res){
+	++count;
+	console.log("\nMESSAGE #"+count);
+    console.log("# REQUEST:".cyan);
+	console.log("# type: DELETE(delete)");
+    console.log("# url: "+req.headers.host+req.originalUrl);
+	console.log("# key: "+req.body.key);
+	console.log("# RESPONSE:".cyan);
 
-	request.delete('http://stage.gnet.it/rest/api/latest/issue/'+req.body.key, {
-	    'auth': {
-	        'user': '99mv66',
-	        'pass': 'stage.2018'
-	    }
+	request.delete({
+		url: 'http://stage.gnet.it/rest/api/latest/issue/'+req.body.key,
+	    auth: login
 	}, function (err, res, body){
-		console.log("error:"+err);
+		if (err) console.log(colors.red("# ERROR: %s"), err);
+		else console.log("# status: 200 (deleted)");
 	});
-    res.status(200);
 });
 
 module.exports = router;
