@@ -1,0 +1,17 @@
+<svg class="lds-blocks" width="30px"  height="30px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;"><rect x="1.5" y="1.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+</rect><rect x="34.5" y="1.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.1375s" calcMode="discrete"></animate>
+</rect><rect x="67.5" y="1.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.275s" calcMode="discrete"></animate>
+</rect><rect x="1.5" y="34.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.9625000000000001s" calcMode="discrete"></animate>
+</rect><rect x="67.5" y="34.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.41250000000000003s" calcMode="discrete"></animate>
+</rect><rect x="1.5" y="67.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.8250000000000001s" calcMode="discrete"></animate>
+</rect><rect x="34.5" y="67.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.6875s" calcMode="discrete"></animate>
+</rect><rect x="67.5" y="67.5" width="31" height="31" fill="#ffffff">
+  <animate attributeName="fill" values="#205081;#ffffff;#ffffff" keyTimes="0;0.125;1" dur="1.1s" repeatCount="indefinite" begin="0.55s" calcMode="discrete"></animate>
+</rect></svg>

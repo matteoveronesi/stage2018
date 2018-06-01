@@ -15,8 +15,25 @@ Sprints
 
  28/05/2018 [DAY 6]
 
-  - Implementazione della comunicazione client <-> node con dati statici [BL]
+  - Implementazione della comunicazione client <-> node con dati statici [BL] => FATTO(DAY 7)
 
  29/05/2018 [DAY 7]
 
   - Implementazione della comunicazione client <-> node con dati statici [FATTO]
+
+ 30/05/2018 [DAY 8]
+
+  - Refactorizzare le varie mancanze [FATTO]
+  - Implementare una chiamata con jira funzionante per una issue [FATTO]
+  - Implementare la visualizzazione delle issue di un progetto [FATTO]
+
+ 31/05/2018 [DAY 9]
+
+  - Implementare l'aggiunta e l'eliminazione di una issue [FATTO]
+  - Implementare i pulsanti di refresh [FATTO]
+  - Implementare la modifica di una issue [FATTO]
+
+ 01/06/2018 [DAY 10]
+
+  - Implementare la modifica dello status [FATTO]
+  - Refactorizzare e controllare il codice/ui []

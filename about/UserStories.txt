@@ -4,8 +4,8 @@ USER STORIES
 - 6 - Modificare una issue	
 - 6 - Eliminare una issue		
 - 6 - Visualizzare lo stato di completamento di una issue	
-- 5 - Autenticazione con Jira  
-- 3 - Grafica minima per la parte ui
+- Y - 5 - Autenticazione con Jira  
+- Y - 3 - Grafica minima per la parte ui
 - 6 - Implementazione dei REST sulla ui
 - 7 - Grafica avanzata e carina (anche personalizzabile)
 - 0 - Funzioni aggiuntive future (??)

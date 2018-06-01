@@ -46,4 +46,23 @@
 
   09:00 - 13:00 refactor routes e implementazione modifica e visualizzazione statica
   14:00 - 16:30 implementazione eliminazione statica
-  16.30 - implementazione del cambio di status 
+  16.30 - 18:00 implementazione del cambio di status 
+
+30/05/2018 [DAY 8]
+
+  09:00 - 10:00 sistemazione e refactor html
+  10:00 - 13:00 ricerche su jira per ricevere una issue
+  14:00 - 15:00 visualizzazione di una issue come json nella pagina
+  15:00 - 18:00 ricerche su json e visualizzazione delle issue di un progetto nella tabella
+
+31/05/2018 [DAY 9]
+
+  09:00 - 09:30 ricerche su come aggiungere una issue
+  09:30 - 12:00 implementazione aggiunta e eliminazione di una issue
+  12:00 - 13:00 implementazione pulsanti di refresh
+  14:00 - 18:00 implementazione della modifica di una issue e ritocchini
+
+01/06/2018 [DAY 10]
+
+  09:00 - 09:30 sistemanza del cambio di issue
+  

@@ -18,6 +18,8 @@ https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.ht
 
 EXPRESS & NODE TUTORIAL
 
+https://www.rapiddg.com/blog/calling-rest-api-nodejs-script
+
 https://www.w3schools.com/jquery/jquery_ajax_load.asp
 
 https://www.w3schools.com/nodejs/
@@ -30,6 +32,8 @@ http://codingjam.it/i-miei-primi-passi-con-node-js-ed-express-js/
 
 NPM APPROVED
 
+https://www.npmjs.com/package/json-find
+
 https://www.npmjs.com/package/nodemon
 
 https://www.npmjs.com/package/colors
@@ -37,3 +41,9 @@ https://www.npmjs.com/package/colors
 HTML TO PUG
 
 https://html-to-pug.com/
+
+OTHER
+
+https://icons8.com
+
+https://loading.io

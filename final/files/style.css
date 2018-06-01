@@ -1,38 +1,67 @@
-.table-margin{
-  margin-top: 85px;
-  margin-bottom: 70px;
+@font-face{
+	font-family: HN;
+    src: url(HelveticaNeue.ttf);
 }
 
+*{
+	font-family: HN;
+}
+
+header{
+	cursor: default;
+}
+
+.th{
+    text-shadow: .3px .3px .3px #000;
+}
+
+.waas{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index:2;
+}
+
+.bg-blue{
+	background-color: #205081;
+	color: #fff;
+}
+
+a:hover:not(.title){
+     text-shadow: 1px 1px 2px #2196F3;
+ }
 i:hover, .i:hover{
-  cursor: pointer;
-  color:lightblue;
-  text-shadow:2px 2px 4px #2b5797;
+    cursor: pointer;
+    color:lightblue;
+    text-shadow: 1px 1px 2px #2196F3;
 }
 
 .i:hover{
-  background-color: #2b5797;
-  text-shadow:2px 2px 4px lightblue;
+    background-color: #205081;
+    text-shadow: 1px 1px 2px lightblue;
 }
 
-.Todo{
-  color: blue;
-}
-.Done{
-  color: green;
+.table-margin{
+    margin-top: 85px;
+    margin-bottom: 70px;
 }
 
 .td-key{
-  width: 110px;
+    width: 68px;
 }
 
 .td-name{
-  width: 265px;
+    width: 310px;
 }
 
 .td-status{
-  width: 0px;
+    width: 52px;
 }
 
 .td-new-name{
-  width: 310px;
+    width: 408px;
+}
+
+.icon-padding{
+    padding-top: 8px;
 }

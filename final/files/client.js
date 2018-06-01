@@ -4,53 +4,70 @@ $(document).ready(function(){
     $(".show-add").click(function(){
         $("#iadd").toggle(100);
     });
+    $("#load").click(function(){
+        $("#content-table").load("/issues");
+    });
 
     $("#new-add").click(function(){
-        var key = $("#new-key").val();
-        var summary = $("#new-name").val();
+        //var key = $("#new-key");
+        var summary = $("#new-name");
         var status = "Todo";
 
-        if(key.length > 0 && summary.length > 0){
-            	$.ajax({
-            	     type: "POST",
-                   url: "/new",
-                   data: {"key": key,"summary": summary,"status": status}
-            	}).done(alert("Richiesta effettuata.\n\ntype: POST\nquery: (add)"));
+        if(/*key.val().length > 0 && */summary.val().length > 0){
+            $.ajax({
+            	type: "POST",
+                url: "/new",
+                data: {/*"key": key.val(),*/"summary": summary.val(),"status": status}
+            }).done(
+                //alert("Richiesta effettuata.\n\ntype: POST\nquery: (add)"));
+                alert(response));
 
-              $("#iadd").toggle(100);
-              $("#new-key").prop("value", "");
-              $("#new-name").prop("value", "");
+            $("#iadd").toggle(100);
+            //key.prop("value", "");
+            summary.prop("value", "");
         }
-        //else alert("Controlla i dati inseriti.");
+        else alert("Controlla i dati inseriti.");
     });
 });
 
-function edit(n){
-    $("#"+n).find(".td-key").find("input").prop("disabled", false);
-    $("#"+n).find(".td-name").find("input").prop("disabled", false);
-    var key = $("#"+n).find(".td-key").find("input").val();
-    var summary = $("#"+n).find(".td-name").find("input").val();
-    var status = $("#"+n).find(".td-status").text();
+function status(n){
+    var status = $("#"+n).find(".td-status").find("i");
 
-    if(key.length > 0 && summary.length > 0 && status.length > 0){
+    if (status.text() === "check_box")
+        status.text("check_box_outline_blank");
+    else
+        status.text("check_box");
+}
+
+function edit(n){
+    var obj = $("#"+n);
+    var key = obj.find(".td-key").find("a");
+    var summary = obj.find(".td-name").find("input");
+    var status = obj.find(".td-status").find("i");
+    var status_name = "";
+
+    if (status.text() === "check_box")
+        status_name = "Done";
+    else
+        status_name = "Todo";
+
+    if(summary.val().length > 0){
       	$.ajax({
-      	     type: "POST",
+      	     type: "PUT",
              url: "/"+n,
-             data: {"key": key,"summary": summary,"status": status}
-      	}).done(alert("Richiesta effettuata.\n\ntype: POST\nquery: (edit)"));
-        $("#"+n).find(".td-key").find("input").prop("disabled", true);
-        $("#"+n).find(".td-name").find("input").prop("disabled", true);
-        $("#"+n).find(".td-key").find("input").prop("value", "");
-        $("#"+n).find(".td-name").find("input").prop("value", "");
+             data: {"key": key.text(),"summary": summary.val(),"status": status_name}
+      	}).done(alert("Richiesta effettuata.\n\ntype: PUT\nquery: (edit)"));
+
+        summary.prop("value", "");
     }
-    //else alert("Controlla i dati inseriti.");
+    else alert("Controlla i dati inseriti.");
 }
 
 function del(n){
-    var key = $("#"+n).find(".td-key").find("input").prop("placeholder");
+    var key = $("#"+n).find(".td-key").find("a").text();
     $.ajax({
          type: "DELETE",
          url: "/"+n,
          data: {"key": key}
-    }).done(alert("Richiesta effettuata.\n\ntype: DELETE\nquery: (delete)"));
+    }).done(/*alert("Richiesta effettuata.\n\ntype: DELETE\nquery: (delete)")*/);
 }
