@@ -16,19 +16,17 @@ header{
 }
 
 .input{
-	border: 2px #fff solid;
-	border-bottom: 2px #272727 solid;
+	border: 1px #fff solid;
+	border-bottom: 1px #ccc solid;
 }
 
 .input:focus{
 	border-radius: 5px;
-	border: 2px #2196F3 solid;
-	border-right: 2px #2196F3 solid;
-	border-bottom: 2px #2196F3 solid;
+	border: 1px #2196F3 solid;
 }
 
 .input:hover{
-	border-bottom: 2px #2196F3 solid;
+	border-bottom: 1px #2196F3 solid;
 }
 
 .th{

@@ -32,6 +32,8 @@ http://codingjam.it/i-miei-primi-passi-con-node-js-ed-express-js/
 
 NPM APPROVED
 
+https://www.npmjs.com/package/axios
+
 https://www.npmjs.com/package/json-find
 
 https://www.npmjs.com/package/nodemon

@@ -7,5 +7,6 @@ USER STORIES
 - Y - 5 - Autenticazione con Jira  
 - Y - 3 - Grafica minima per la parte ui
 - Y - 6 - Implementazione dei REST sulla ui
-- 7 - Grafica avanzata e carina (anche personalizzabile)
-- 0 - Funzioni aggiuntive future (??)
+- Y - 7 - Grafica avanzata e carina (anche personalizzabile)
+- 7 - Avere nell'elenco tutti i progetti raggruppabili
+- 8 - Menu con impostazioni varie (utente,preferenze, ecc)

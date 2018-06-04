@@ -1,6 +1,6 @@
 const express = require('express');
 const colors = require('colors');
-const routes = require('./routes/index');
+const routes = require('./routes/index2');
 const app = express();
 
 app.use(express.static('files'));

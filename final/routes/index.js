@@ -1,24 +1,26 @@
-const express = require('express');
-const parser = require('body-parser');
-const request = require('request');
-const colors = require('colors');
+const express = require("express");
+const parser = require("body-parser");
+const request = require("request");
+const colors = require("colors");
 const router = express.Router();
 const encoded = parser.urlencoded({ extended: false });
 
 var data; //JSON delle issue del progetto
 var table; //html di output delle issue
-var count = 0; //contatore dei messaggi
-var login = {'user': '99mv66', 'pass': 'stage.2018'};
 
-function getTime(){
-	return new Date().toLocaleTimeString();
-}
+/* DATI UTENTE */
+var login = {"user": "99mv66", "pass": "stage.2018"};
+var host = "http://stage.gnet.it";
+var rest = "/rest/api/latest";
+var project = "TODO";
+
+function getTime(){ return new Date().toLocaleTimeString(); }
 
 function extractIssues(){
 	table = "";
 	for (var i = 0; i < data.total; i++){
 		table += '<tr id="'+i+'">';
-		table += '<td title="Cambia Status" onclick="status('+i+')" class="td-status "><i class="material-icons icon-padding">';
+		table += '<td title="Cambia Status" onclick="status('+i+')" class="td-status"><i class="material-icons icon-padding">';
 		if (data.issues[i].fields.status.name === "To Do")
 			table += 'check_box_outline_blank';
 		else
@@ -35,20 +37,19 @@ function extractIssues(){
 function getIssues(){
 	return new Promise( function (resolve, reject) {
 		request.get({
-			url: 'http://stage.gnet.it/rest/api/latest/search?jql=project=TODO&maxResults=200',
+			url: host + rest + "/search?jql=project=" + project + "&maxResults=200",
 		    auth: login
 		}, function (err, res, body){
-			if (res.errorMessages)
-				reject(" ERROR: "+res);
+			if (err)
+				reject(" ERROR: " + err);
 			else
 				data = JSON.parse(body);
 			resolve(body);
 		});
 	})
 }
-getIssues();
 
-router.get('/issues', function(req, res){
+router.get("/issues", function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: GET(load)");
@@ -63,7 +64,7 @@ router.get('/issues', function(req, res){
 	});
 });
 
-router.post('/edit/status', encoded, function(req, res){
+router.post("/edit/status", encoded, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(edit status)");
@@ -73,7 +74,7 @@ router.post('/edit/status', encoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	request.post({
-		url: 'http://stage.gnet.it/rest/api/latest/issue/' + req.body.key + '/transitions',
+		url: host + rest + "/issue/" + req.body.key + "/transitions",
 		auth: login,
 		json: {
 			"transition": {
@@ -81,14 +82,14 @@ router.post('/edit/status', encoded, function(req, res){
 			}
 		}
 	}, function(err, res, body){
-		if (res.errorMessages)
-			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		if (err)
+			console.log(colors.red(" ERROR: %s"), err);
 		else
 			console.log(" status: 200 (edited)");
 	});
 });
 
-router.put('/edit/summary', encoded, function(req, res){
+router.put("/edit/summary", encoded, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: PUT(edit summary)");
@@ -98,7 +99,7 @@ router.put('/edit/summary', encoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	request.put({
-		url: 'http://stage.gnet.it/rest/api/latest/issue/' + req.body.key,
+		url: host + rest + "/issue/" + req.body.key,
 		auth: login,
 		json: {
 	    "fields": {
@@ -106,14 +107,14 @@ router.put('/edit/summary', encoded, function(req, res){
    		}
 	}
 	}, function(err, res, body){
-		if (res.errorMessages)
-			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		if (err)
+			console.log(colors.red(" ERROR: %s"), err);
 		else
 			console.log(" status: 200 (edited)");
 	});
 });
 
-router.post('/add', encoded, function(req, res){
+router.post("/add", encoded, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(add)");
@@ -124,13 +125,13 @@ router.post('/add', encoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	request.post({
-		url: 'http://stage.gnet.it/rest/api/latest/issue',
+		url: host + rest + "/issue",
 		auth: login,
 		json: {
 	    "fields": {
 	        "project":
 	        {
-	            "key": "TODO"
+	            "key": project
 	        },
 	        "summary": req.body.summary,
 	        "description": "",
@@ -140,14 +141,14 @@ router.post('/add', encoded, function(req, res){
    		}
 	}
 	}, function(err, res, body){
-		if (res.errorMessages)
-			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		if (err)
+			console.log(colors.red(" ERROR: %s"), err);
 		else
 			console.log(" status: 200 (edited)");
 	});
 });
 
-router.delete('/delete', encoded, function(req, res){
+router.delete("/delete", encoded, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: DELETE(delete)");
@@ -156,11 +157,11 @@ router.delete('/delete', encoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	request.delete({
-		url: 'http://stage.gnet.it/rest/api/latest/issue/' + req.body.key,
+		url: host + rest + "/issue/" + req.body.key,
 	    auth: login
 	}, function (err, res, body){
-		if (res.errorMessages)
-			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		if (err)
+			console.log(colors.red(" ERROR: %s"), err);
 		else
 			console.log(" status: 200 (edited)");
 	});

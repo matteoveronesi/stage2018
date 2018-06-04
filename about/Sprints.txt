@@ -40,5 +40,6 @@ Sprints
 
 04/06/2018 [DAY 11] 
 
-  - Implementare la modifica del nome tramite input con conferma a comparsa []
-  - Aggiungere un controllo degli errori funzionante []
+  - Implementare la modifica del nome tramite input con conferma a comparsa [CANCELLED]
+  - Aggiungere un controllo degli errori funzionante [CANCELLED]
+  - Dinamicizzare i dati degli url e unificare le request di jira [FATTO]
