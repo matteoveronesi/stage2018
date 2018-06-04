@@ -1,21 +1,22 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const parser = require('body-parser');
 const request = require('request');
 const colors = require('colors');
 const router = express.Router();
-const parseUrlencoded = bodyParser.urlencoded({ extended: false });
+const encoded = parser.urlencoded({ extended: false });
 
 var data; //JSON delle issue del progetto
 var table; //html di output delle issue
 var count = 0; //contatore dei messaggi
-var login = {
-	'user': '99mv66',
-	'pass': 'stage.2018'
-};
+var login = {'user': '99mv66', 'pass': 'stage.2018'};
+
+function getTime(){
+	return new Date().toLocaleTimeString();
+}
 
 function extractIssues(){
 	table = "";
-	for (var i = 0; i< data.total; i++){
+	for (var i = 0; i < data.total; i++){
 		table += '<tr id="'+i+'">';
 		table += '<td title="Cambia Status" onclick="status('+i+')" class="td-status "><i class="material-icons icon-padding">';
 		if (data.issues[i].fields.status.name === "To Do")
@@ -24,7 +25,7 @@ function extractIssues(){
 			table += 'check_box';
 		table += '</i></td>';
 		table += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="http://stage.gnet.it/browse/'+data.issues[i].key+'" target="_blank">'+data.issues[i].key+'</a></p></td>';
-		table += '<td title="Cambia Nome" class="td-name"><input class="w3-input  w3-white" type="text" placeholder="'+data.issues[i].fields.summary+'" value="'+data.issues[i].fields.summary+'"></td>';
+		table += '<td title="Cambia Nome" class="td-name"><input class="w3-input input" type="text" placeholder="'+data.issues[i].fields.summary+'" value="'+data.issues[i].fields.summary+'"></td>';
 		table += '<td><i title="Conferma" onclick="edit('+i+')" class="material-icons icon-padding">mode_edit</i> <i title="Elimina" onclick="del('+i+')" class="material-icons">delete</i></td>';
 		table += '</tr>';
 	}
@@ -37,10 +38,10 @@ function getIssues(){
 			url: 'http://stage.gnet.it/rest/api/latest/search?jql=project=TODO&maxResults=200',
 		    auth: login
 		}, function (err, res, body){
-			if (res.errorMessages){
-				reject("# ERROR: "+res);
-			}
-			else data = JSON.parse(body);
+			if (res.errorMessages)
+				reject(" ERROR: "+res);
+			else
+				data = JSON.parse(body);
 			resolve(body);
 		});
 	})
@@ -48,33 +49,31 @@ function getIssues(){
 getIssues();
 
 router.get('/issues', function(req, res){
-	++count;
-	console.log("\n# ID "+count);
-    console.log("# REQUEST:".cyan);
-	console.log("# type: GET(load)");
-    console.log("# url: "+req.headers.host+req.originalUrl);
-	console.log("# RESPONSE:".cyan);
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: GET(load)");
+    console.log(" url: " + req.headers.host + req.originalUrl);
+	console.log(" RESPONSE:".cyan);
 
 	getIssues().then(function (output){
 		res.send(extractIssues());
-		console.log("# status: 200 (sent)");
+		console.log(" status: 200 (sent)");
 	}).catch(function (output) {
 		console.log(colors.red("%s",output));
 	});
 });
 
-router.post('/edit/status', parseUrlencoded, function(req, res){
-	++count;
-	console.log("\n# ID "+count);
-    console.log("# REQUEST:".cyan);
-	console.log("# type: POST(edit status)");
-    console.log("# url: "+req.headers.host+req.originalUrl);
-    console.log("# key: "+req.body.key);
-    console.log("# status: "+req.body.status);
-	console.log("# RESPONSE:".cyan);
+router.post('/edit/status', encoded, function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: POST(edit status)");
+    console.log(" url: " + req.headers.host+req.originalUrl);
+    console.log(" key: " + req.body.key);
+    console.log(" status: " + req.body.status);
+	console.log(" RESPONSE:".cyan);
 
 	request.post({
-		url: 'http://stage.gnet.it/rest/api/latest/issue/'+req.body.key+'/transitions',
+		url: 'http://stage.gnet.it/rest/api/latest/issue/' + req.body.key + '/transitions',
 		auth: login,
 		json: {
 			"transition": {
@@ -82,24 +81,24 @@ router.post('/edit/status', parseUrlencoded, function(req, res){
 			}
 		}
 	}, function(err, res, body){
-		if (err) console.log(colors.red("# ERROR: %s"), err);
-		else console.log("# status: 200 (edited)");
+		if (res.errorMessages)
+			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		else
+			console.log(" status: 200 (edited)");
 	});
 });
 
-router.put('/edit/summary', parseUrlencoded, function(req, res){
-	++count;
-	console.log("\n# ID "+count);
-    console.log("# REQUEST:".cyan);
-	console.log("# type: PUT(edit summary)");
-	console.log("# url: "+req.headers.host+req.originalUrl);
-    console.log("# key: "+req.body.key);
-    console.log("# summary: "+req.body.summary);
-    console.log("# status: "+req.body.status);
-	console.log("# RESPONSE:".cyan);
+router.put('/edit/summary', encoded, function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: PUT(edit summary)");
+	console.log(" url: " + req.headers.host + req.originalUrl);
+    console.log(" key: " + req.body.key);
+    console.log(" summary: " + req.body.summary);
+	console.log(" RESPONSE:".cyan);
 
 	request.put({
-		url: 'http://stage.gnet.it/rest/api/latest/issue/'+req.body.key,
+		url: 'http://stage.gnet.it/rest/api/latest/issue/' + req.body.key,
 		auth: login,
 		json: {
 	    "fields": {
@@ -107,21 +106,22 @@ router.put('/edit/summary', parseUrlencoded, function(req, res){
    		}
 	}
 	}, function(err, res, body){
-		if (err) console.log(colors.red("# ERROR: %s"), err);
-		else console.log("# status: 200 (edited)");
+		if (res.errorMessages)
+			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		else
+			console.log(" status: 200 (edited)");
 	});
 });
 
-router.post('/add', parseUrlencoded, function(req, res){
-	++count;
-	console.log("\n# ID "+count);
-    console.log("# REQUEST:".cyan);
-	console.log("# type: POST(add)");
-    console.log("# url: "+req.headers.host+req.originalUrl);
-    console.log("# key: "+req.body.key);
-    console.log("# summary: "+req.body.summary);
-    console.log("# status: "+req.body.status);
-	console.log("# RESPONSE:".cyan);
+router.post('/add', encoded, function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: POST(add)");
+    console.log(" url: " + req.headers.host+req.originalUrl);
+    console.log(" key: " + req.body.key);
+    console.log(" summary: " + req.body.summary);
+    console.log(" status: " + req.body.status);
+	console.log(" RESPONSE:".cyan);
 
 	request.post({
 		url: 'http://stage.gnet.it/rest/api/latest/issue',
@@ -140,26 +140,29 @@ router.post('/add', parseUrlencoded, function(req, res){
    		}
 	}
 	}, function(err, res, body){
-		if (err) console.log(colors.red("# ERROR: %s"), err);
-		else console.log("# status: 201 (created)");
+		if (res.errorMessages)
+			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		else
+			console.log(" status: 200 (edited)");
 	});
 });
 
-router.delete('/delete', parseUrlencoded, function(req, res){
-	++count;
-	console.log("\n# ID "+count);
-    console.log("# REQUEST:".cyan);
-	console.log("# type: DELETE(delete)");
-    console.log("# url: "+req.headers.host+req.originalUrl);
-	console.log("# key: "+req.body.key);
-	console.log("# RESPONSE:".cyan);
+router.delete('/delete', encoded, function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: DELETE(delete)");
+    console.log(" url: " + req.headers.host + req.originalUrl);
+	console.log(" key: " + req.body.key);
+	console.log(" RESPONSE:".cyan);
 
 	request.delete({
-		url: 'http://stage.gnet.it/rest/api/latest/issue/'+req.body.key,
+		url: 'http://stage.gnet.it/rest/api/latest/issue/' + req.body.key,
 	    auth: login
 	}, function (err, res, body){
-		if (err) console.log(colors.red("# ERROR: %s"), err);
-		else console.log("# status: 200 (deleted)");
+		if (res.errorMessages)
+			console.log(colors.red(" ERROR: %s"), res.errorMessages);
+		else
+			console.log(" status: 200 (edited)");
 	});
 });
 

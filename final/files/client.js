@@ -19,7 +19,7 @@ $(document).ready(function(){
             	type: "POST",
                 url: "/rest/add",
                 data: {/*"key": key.val(),*/"summary": summary.val(),"status": status}
-            }).done(refresh(2,1));
+            }).done(refresh(2,2));
 
             $("#iadd").toggle(100);
             //key.prop("value", "");
@@ -31,8 +31,11 @@ $(document).ready(function(){
 
 function refresh(sec,opt){
     $("#logo").prop("src", "spin.svg");
-    if (opt == 1) $("#content-table").load("/rest/issues");
-    setTimeout(function(){$("#logo").prop("src", "logo.png")}, sec*1000);
+    if (opt == 1)
+        $("#content-table").load("/rest/issues");
+    else if (opt == 2)
+        setTimeout(function(){$("#content-table").load("/rest/issues")}, 1100);
+    setTimeout(function(){$("#logo").prop("src", "logo.png")}, sec*1100);
 }
 
 function status(n){
@@ -68,7 +71,7 @@ function edit(n){
       	     type: "PUT",
              url: "/rest/edit/summary",
              data: {"key": key.text(),"summary": summary.val()}
-      	}).done(refresh(2,0));
+      	}).done(refresh(2,2));
 
     }
     else alert("[ ISSUE "+key.text()+" ]\nControlla i dati inseriti.");
@@ -80,5 +83,5 @@ function del(n){
          type: "DELETE",
          url: "/rest/delete",
          data: {"key": key}
-    }).done(refresh(2,1));
+    }).done(refresh(2,2));
 }

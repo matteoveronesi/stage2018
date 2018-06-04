@@ -11,6 +11,26 @@ header{
 	cursor: default;
 }
 
+.title{
+	text-shadow: .3px .3px .3px #fff;
+}
+
+.input{
+	border: 2px #fff solid;
+	border-bottom: 2px #272727 solid;
+}
+
+.input:focus{
+	border-radius: 5px;
+	border: 2px #2196F3 solid;
+	border-right: 2px #2196F3 solid;
+	border-bottom: 2px #2196F3 solid;
+}
+
+.input:hover{
+	border-bottom: 2px #2196F3 solid;
+}
+
 .th{
     text-shadow: .3px .3px .3px #000;
 }
