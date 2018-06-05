@@ -12,33 +12,22 @@
 </head>
 <body>
     <header class="w3-top">
-		<div class="bg-blue w3-padding">
+		<div class="bg-blue w3-padding w3-card-2">
 			<img id="logo" src="spin.svg" width="26px">
-	    <a class="title">JIRA Issues Panel</a>
+	    	<a class="title">JIRA Issues Panel</a>
 			<div class="w3-bar-item w3-right">
 				<i title="Nuova Issue" class="w3-dropdown-click w3-xlarge material-icons i ihead show-add">add</i>
 				<i title="Menu" class="w3-dropdown-click w3-xlarge material-icons i ihead show-menu">settings</i>
-		  </div>
+		  	</div>
 		</div>
 
-		<div class="w3-white">
-			<table class="w3-table w3-card-2">
-				<tr id="iadd" class="w3-dropdown-content w3-card-2 add_tr">
-					<!--<td class="td-key"><input id="new-key" class="w3-input" type="text" placeholder="K"></td>-->
-					<td><input id="new-name" class="td-new-name w3-input" type="text" placeholder="Titolo Issue"></td>
-					<td><input id="new-add" class="w3-button w3-round bg-blue w3-hover-blue" type="submit" value="Add"></td>
-				</tr>
-				<tr>
-					<td class="td-status th"></td>
-					<td class="td-key th">Key</td>
-					<td class="td-name th">Issue</td>
-					<td></td>
-				</tr>
-			</table>
+		<div id="iadd" class="w3-white w3-padding w3-dropdown-content w3-card-2">
+			<input id="new-name" class="w3-input w3-left" type="text" placeholder="Titolo Issue">
+			<input id="new-add" class="w3-button w3-round bg-blue w3-right w3-hover-blue" type="submit" value="Add">
 		</div>
     </header>
 
-	<table id="content-table" class="table-margin w3-table"></table>
+	<table id="content-table" class="table-margin"></table>
 
 	<footer class="w3-bottom">
 		<button id="load" class="w3-button w3-card-4 w3-margin w3-hover-blue w3-round w3-left bg-blue">Aggiorna Dati</button>

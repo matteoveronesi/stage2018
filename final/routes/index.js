@@ -14,7 +14,9 @@ var host = "http://stage.gnet.it";
 var rest = "/rest/api/latest";
 var project = "TODO";
 
-function getTime(){ return new Date().toLocaleTimeString(); }
+function getTime(){
+	return new Date().toLocaleTimeString();
+}
 
 function extractIssues(){
 	table = "";

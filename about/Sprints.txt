@@ -43,3 +43,8 @@ Sprints
   - Implementare la modifica del nome tramite input con conferma a comparsa [CANCELLED]
   - Aggiungere un controllo degli errori funzionante [CANCELLED]
   - Dinamicizzare i dati degli url e unificare le request di jira [FATTO]
+
+05/06/2018 [DAY 12] 
+
+  - Sistemare la grafica della pagina [FATTO]
+  - Implementare il menu di configurazione []

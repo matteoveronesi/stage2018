@@ -3,6 +3,7 @@ $(document).ready(function(){
 
     $(".show-add").click(function(){
         $("#iadd").toggle(100);
+        $("#iadd").find("#new-name").focus();
     });
 
     $("#load").click(function(){
@@ -53,12 +54,19 @@ function status(n){
         status.text("check_box");
     }
 
-
     $.ajax({
         type: "POST",
          url: "/rest/edit/status",
          data: {"key": key.text(),"status": status_value}
 	}).done(/*refresh(2)*/);
+}
+
+function show(n){
+    $("#"+n).find(".edit").css("display","inline");
+}
+
+function hide(n){
+    $("#"+n).find(".edit").css("display","none");
 }
 
 function edit(n){
@@ -72,7 +80,7 @@ function edit(n){
              url: "/rest/edit/summary",
              data: {"key": key.text(),"summary": summary.val()}
       	}).done(refresh(2,2));
-
+        $("#"+n).find(".edit").css("display","inline");
     }
     else alert("[ ISSUE "+key.text()+" ]\nControlla i dati inseriti.");
 }

@@ -76,3 +76,7 @@
   10:00 - 13:00 piccoli miglioramenti + modifica alla gestione degli errori su node(non completa)
   14:00 - 15:00 sistemazione errori (sospesa)
   16:00 - 18:00 organizzazione dinamica dei dati utente e unificazione request jira
+
+05/06/2018 [DAY 12] 
+
+  09:00 - 12:00 sistemazione grafica della pagina (padding, parti inutili, modifica a comparsa)

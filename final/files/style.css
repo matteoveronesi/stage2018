@@ -11,11 +11,34 @@ header{
 	cursor: default;
 }
 
+table{
+	padding-left: 10px;
+}
+
+#iadd{
+	width: 100%;
+}
+
+#new-name{
+	width: 350px;
+}
+
+.edit{
+	display: none;
+	position: absolute;
+	left: 398px;
+}
+
+.icons{
+	padding-top: 6px;
+}
+
 .title{
 	text-shadow: .3px .3px .3px #fff;
 }
 
 .input{
+	padding-right: 32px;
 	border: 1px #fff solid;
 	border-bottom: 1px #ccc solid;
 }
@@ -27,10 +50,6 @@ header{
 
 .input:hover{
 	border-bottom: 1px #2196F3 solid;
-}
-
-.th{
-    text-shadow: .3px .3px .3px #000;
 }
 
 .waas{
@@ -60,7 +79,7 @@ i:hover, .i:hover{
 }
 
 .table-margin{
-    margin-top: 85px;
+    margin-top: 45px;
     margin-bottom: 70px;
 }
 
@@ -73,13 +92,5 @@ i:hover, .i:hover{
 }
 
 .td-status{
-    width: 52px;
-}
-
-.td-new-name{
-    width: 408px;
-}
-
-.icon-padding{
-    padding-top: 8px;
+    width: 35px;
 }
