@@ -80,3 +80,6 @@
 05/06/2018 [DAY 12] 
 
   09:00 - 12:00 sistemazione grafica della pagina (padding, parti inutili, modifica a comparsa)
+  12:00 - 13:00 implementazione del menu a comparsa
+  14:00 - 16:00 morte cerebrale
+  16:00 - 18:00 continuo implementazione menu

@@ -6,6 +6,10 @@ $(document).ready(function(){
         $("#iadd").find("#new-name").focus();
     });
 
+    $(".show-menu").click(function(){
+        
+    });
+
     $("#load").click(function(){
         refresh(1,1);
     });
@@ -26,7 +30,10 @@ $(document).ready(function(){
             //key.prop("value", "");
             summary.prop("value", "");
         }
-        else alert("[ NUOVA ISSUE ]\nControlla i dati inseriti.");
+        else{
+            summary.css("background","red");
+            setTimeout(()=>summary.css("background","none"),300);
+        }
     });
 });
 
@@ -66,7 +73,7 @@ function show(n){
 }
 
 function hide(n){
-    $("#"+n).find(".edit").css("display","none");
+    setTimeout(()=>$("#"+n).find(".edit").css("display","none"),150);
 }
 
 function edit(n){
@@ -82,7 +89,10 @@ function edit(n){
       	}).done(refresh(2,2));
         $("#"+n).find(".edit").css("display","inline");
     }
-    else alert("[ ISSUE "+key.text()+" ]\nControlla i dati inseriti.");
+    else{
+        summary.css("background","red");
+        setTimeout(()=>summary.css("background","none"),300);
+    }
 }
 
 function del(n){

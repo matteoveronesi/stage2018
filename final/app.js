@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.static('files'));
 
-app.get('/', (req, res) => res.render('index'));
+//app.get('/', (req, res) => res.render('index'));
 
 app.use('/rest', routes);
 

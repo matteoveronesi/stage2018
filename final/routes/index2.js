@@ -59,6 +59,7 @@ function callJira(dest, type, data){
 
 router.all('/issues', function (req, res, next) {
 	if(req.headers.host == "localhost:8080") next();
+	else res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
 })
 router.all('/add', function (req, res, next) {
 	if(req.headers.host == "localhost:8080") next();
@@ -76,9 +77,11 @@ router.get("/issues", function(req, res){
 	callJira(dest, "GET").then(function (output){
 		res.send(extractIssues());
 		console.log(" status: 200 (sent)");
+			console.log(tableToString);
 	}).catch(function (output) {
 		console.log(colors.red(output));
 	});
+
 });
 
 router.post("/edit/status", encoded, function(req, res){
@@ -132,9 +135,7 @@ router.post("/add", encoded, function(req, res){
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(add)");
     console.log(" url: " + req.headers.host + req.originalUrl);
-    console.log(" key: " + req.body.key);
     console.log(" summary: " + req.body.summary);
-    console.log(" status: " + req.body.status);
 	console.log(" RESPONSE:".cyan);
 
     var dest = host + rest + "/issue";

@@ -13,6 +13,8 @@ header{
 
 table{
 	padding-left: 10px;
+	margin-top: 45px;
+	margin-bottom: 70px;
 }
 
 #iadd{
@@ -21,6 +23,12 @@ table{
 
 #new-name{
 	width: 350px;
+}
+
+.refresh{
+	position: fixed;
+	left: 15px;
+	bottom: 15px;
 }
 
 .edit{
@@ -52,13 +60,6 @@ table{
 	border-bottom: 1px #2196F3 solid;
 }
 
-.waas{
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index:2;
-}
-
 .bg-blue{
 	background-color: #205081;
 	color: #fff;
@@ -76,11 +77,6 @@ i:hover, .i:hover{
 .i:hover{
     background-color: #205081;
     text-shadow: 1px 1px 2px lightblue;
-}
-
-.table-margin{
-    margin-top: 45px;
-    margin-bottom: 70px;
 }
 
 .td-key{
