@@ -25,6 +25,23 @@ table{
 	width: 350px;
 }
 
+.sidebar-focus{
+	display: none;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.4);
+}
+
+.sidebar{
+	position: absolute;
+	right: 0px;
+	height: 100%;
+	width: 300px;
+	background: #fff;
+	padding: 50px;
+}
+
 .refresh{
 	position: fixed;
 	left: 15px;
@@ -56,7 +73,7 @@ table{
 	border: 1px #2196F3 solid;
 }
 
-.input:hover{
+.input:hover, #login_user:hover, #login_host:hover, #login_pass:hover{
 	border-bottom: 1px #2196F3 solid;
 }
 

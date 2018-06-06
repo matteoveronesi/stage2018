@@ -83,3 +83,8 @@
   12:00 - 13:00 implementazione del menu a comparsa
   14:00 - 16:00 morte cerebrale
   16:00 - 18:00 continuo implementazione menu
+
+06/06/2018 [DAY 13] 
+
+  09:00 - 13:00 continuo implementazione base menu
+  14:00 - 18:00 aggiunta chiamata di login e altre funzioni di accesso e salvataggio dei dati utente

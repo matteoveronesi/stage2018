@@ -2,6 +2,7 @@ const express = require("express");
 const parser = require("body-parser");
 const request = require("request");
 const colors = require("colors");
+const jsf = require("jsonfile");
 const router = express.Router();
 const encoded = parser.urlencoded({ extended: false });
 
@@ -9,8 +10,8 @@ var tableData; //JSON delle issue del progetto
 var tableToString; //html di output delle issue
 
 /* DATI UTENTE */
-var login = {"user": "99mv66", "pass": "stage.2018"};
-var host = "http://stage.gnet.it";
+var login;
+var host;
 var rest = "/rest/api/latest";
 var project = "TODO";
 
@@ -29,13 +30,37 @@ function extractIssues(){
 		else
 			tableToString += 'check_box';
 		tableToString += '</i></td>';
-		tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="http://stage.gnet.it/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
+		tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
 		tableToString += '<td title="Cambia Nome" class="td-name"><input onblur="hide('+i+')" onfocus="show('+i+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
 		tableToString += '<td class="icons"><i title="Conferma" onclick="edit('+i+')" class="material-icons edit">mode_edit</i> <i title="Elimina" onclick="del('+i+')" class="material-icons">delete</i></td>';
 		tableToString += '</tr>';
 	}
 
 	return tableToString;
+}
+
+function getUserData(){
+	jsf.readFile("files/usr.json", function(err, userData){
+		if (err)
+			console.log(err);
+		else{
+			login = userData[0];
+			host = userData[1].host;
+		}
+	});
+}
+
+function setUserData(host, user, pass){
+	jsf.writeFile("files/usr.json", [{
+		"user": user,
+		"pass": pass
+	},{
+		"host": host
+	}], function (err){
+		if (err)
+			console.log(err);
+	});
+	getUserData();
 }
 
 function callJira(dest, type, data){
@@ -49,21 +74,65 @@ function callJira(dest, type, data){
             if (err)
                 reject(" ERROR: " + err);
             else{
-                if (type == "GET")
-					tableData = JSON.parse(body);
-                resolve(body);
+                if (type == "GET"){
+					try{
+				        tableData = JSON.parse(body);
+				    }
+				    catch (e){
+				        body = "denied";
+				    }
+	                resolve(body);
+				}
             }
         });
     });
 }
 
-router.all('/issues', function (req, res, next) {
-	if(req.headers.host == "localhost:8080") next();
+router.all('/:name', function (req, res, next) {
+	getUserData();
+
+	if(req.headers.host == "localhost:8080") setTimeout(()=>next(),500);
 	else res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
 })
-router.all('/add', function (req, res, next) {
-	if(req.headers.host == "localhost:8080") next();
-})
+
+router.post("/login", encoded, function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: POST(login)");
+    console.log(" url: " + req.headers.host + req.originalUrl);
+    console.log(" host: " + req.body.host);
+    console.log(" user: " + req.body.user);
+    console.log(" pass: " + req.body.pass);
+	console.log(" RESPONSE:".cyan);
+
+	setUserData(req.body.host, req.body.user, req.body.pass);
+    var dest = req.body.host + rest + "/project";
+	callJira(dest, "GET").then(function (output){
+		if (output == "denied")
+			res.sendStatus(401);
+		else
+			res.sendStatus(200);
+		console.log(" status: 200 (sent)");
+	}).catch(function (output) {
+		console.log(colors.red(output));
+	})
+});
+
+router.get("/userdata", function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: GET(userdata)");
+    console.log(" url: " + req.headers.host + req.originalUrl);
+	console.log(" RESPONSE:".cyan);
+	if (login){
+		console.log(" status: 200 (sent)");
+		res.send(login.user);
+	}
+	else{
+		console.log(" ERROR: 401 Unauthorized.".red);
+		res.sendStatus(401);
+	}
+});
 
 router.get("/issues", function(req, res){
 	console.log("\n(" + getTime() + ")");
@@ -72,16 +141,17 @@ router.get("/issues", function(req, res){
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" RESPONSE:".cyan);
 
-    var dest = host + rest + "/search?jql=project=" + project + "&maxResults=200";
-
-	callJira(dest, "GET").then(function (output){
-		res.send(extractIssues());
-		console.log(" status: 200 (sent)");
-			console.log(tableToString);
-	}).catch(function (output) {
-		console.log(colors.red(output));
-	});
-
+	if (!login)
+		res.send("<h3>Nessun accesso effettuato.</h3>");
+	else{
+		var dest = host + rest + "/search?jql=project=" + project + "&maxResults=200";
+		callJira(dest, "GET").then(function (output){
+			res.send(extractIssues());
+			console.log(" status: 200 (sent)");
+		}).catch(function (output) {
+			console.log(colors.red(output));
+		});
+	}
 });
 
 router.post("/edit/status", encoded, function(req, res){

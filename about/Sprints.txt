@@ -47,4 +47,8 @@ Sprints
 05/06/2018 [DAY 12] 
 
   - Sistemare la grafica della pagina [FATTO]
-  - Implementare il menu di configurazione []
+  - Implementare il menu di configurazione [BL] => FATTO(DAY 13)
+
+06/06/2018 [DAY 13] 
+
+  - Implemetare il menu di configurazione funzionante [FATTO]
