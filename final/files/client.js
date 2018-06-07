@@ -75,15 +75,15 @@ $(document).ready(function(){
     });
 
     $("#new-add").click(function(){
-        //var key = $("#new-key");
+        var key = $("#new-key");
         var summary = $("#new-name");
         var status = "Todo";
 
-        if(/*key.val().length > 0 && */summary.val().length > 0){
+        if(key.val().length > 0 && summary.val().length > 0){
             $.ajax({
             	type: "POST",
                 url: "/rest/add",
-                data: {/*"key": key.val(),*/"summary": summary.val(),"status": status},
+                data: {"key": key.val(),"summary": summary.val(),"status": status},
                 success: function(res){
                     console.log(res);
                     refresh(2,2);

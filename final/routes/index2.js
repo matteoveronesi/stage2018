@@ -154,6 +154,7 @@ router.get("/userdata", function(req, res){
 
 	if (login){
 		callJira(host + rest + "/project", "GET").then(function (output){
+			projects = [];
 			JSON.parse(output).forEach(function(p,i){
 				projects.push(p.key);
 				console.log(p.key);
@@ -185,7 +186,7 @@ router.get("/projects", function(req, res){
 	console.log(projects);
 
 	if (!login)
-		res.send("<h3>Nessun accesso effettuato.</h3>");
+		res.send("<tr><td><h3>Accesso non effettuato.</h3></td></tr>");
 	else{
 		extractProjectsIssues();
 		setTimeout(()=>res.send(tableToString),2000);
@@ -247,6 +248,7 @@ router.post("/add", encoded, function(req, res){
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(add)");
     console.log(" url: " + req.headers.host + req.originalUrl);
+    console.log(" key: " + req.body.key);
     console.log(" summary: " + req.body.summary);
 	console.log(" RESPONSE:".cyan);
 
@@ -255,7 +257,7 @@ router.post("/add", encoded, function(req, res){
         "fields": {
             "project":
             {
-                "key": "TODO" //project
+                "key": req.body.key
             },
             "summary": req.body.summary,
             "description": "",

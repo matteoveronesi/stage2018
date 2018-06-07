@@ -96,3 +96,4 @@
   11:00 - 13:00 implementazione chiamate jira per i progetti disponibili
   14:00 - 15:00 completamento visualizzazione issues divise per progetto
   15:00 - 16:00 aggiunta della funzione di log out
+  16:00 - 18:00 aggiunta della scelta del progetto quando si crea una nuova issue

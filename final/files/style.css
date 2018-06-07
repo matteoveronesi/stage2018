@@ -17,8 +17,21 @@ table{
 	width: 100%;
 }
 
+#new-key{
+	width: 100px;
+}
+
 #new-name{
-	width: 350px;
+	position: absolute;
+	top: 8px;
+	left: 125px;
+	width: 260px;
+}
+
+#new-add{
+	position: absolute;
+	top: 8px;
+	left: 400px;
 }
 
 .logout{
