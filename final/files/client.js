@@ -76,8 +76,6 @@ $(document).ready(function(){
             summary.prop("value", "");
         }
         else{
-            summary.css("background","red");
-            setTimeout(()=>summary.css("background","none"),300);
         }
     });
 });
@@ -149,8 +147,6 @@ function edit(n){
         $("#"+n).find(".edit").css("display","inline");
     }
     else{
-        summary.css("background","red");
-        setTimeout(()=>summary.css("background","none"),300);
     }
 }
 
