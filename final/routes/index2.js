@@ -13,7 +13,7 @@ var tableToString; //html di output delle issue
 var login;
 var host;
 var rest = "/rest/api/latest";
-var project = "TODO";
+var projects;
 
 function getTime(){
 	return new Date().toLocaleTimeString();
@@ -31,7 +31,7 @@ function extractIssues(){
 			tableToString += 'check_box';
 		tableToString += '</i></td>';
 		tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
-		tableToString += '<td title="Cambia Nome" class="td-name"><input onblur="hide('+i+')" onfocus="show('+i+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
+		tableToString += '<td title="Cambia Nome" class="td-name"><input onblur="edit('+i+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
 		tableToString += '<td class="icons"><i title="Conferma" onclick="edit('+i+')" class="material-icons edit">mode_edit</i> <i title="Elimina" onclick="del('+i+')" class="material-icons">delete</i></td>';
 		tableToString += '</tr>';
 	}
@@ -81,8 +81,8 @@ function callJira(dest, type, data){
 				    catch (e){
 				        body = "denied";
 				    }
-	                resolve(body);
 				}
+				resolve(body);
             }
         });
     });
@@ -124,9 +124,14 @@ router.get("/userdata", function(req, res){
 	console.log(" type: GET(userdata)");
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" RESPONSE:".cyan);
+
 	if (login){
+		callJira(host + "/rest/api/latest/user?username=" + login.user, "GET").then(function (output){
+			res.send([login.user, JSON.parse(output).displayName]);
+		}).catch(function (output) {
+			console.log(colors.red(output));
+		});
 		console.log(" status: 200 (sent)");
-		res.send(login.user);
 	}
 	else{
 		console.log(" ERROR: 401 Unauthorized.".red);
@@ -144,12 +149,13 @@ router.get("/issues", function(req, res){
 	if (!login)
 		res.send("<h3>Nessun accesso effettuato.</h3>");
 	else{
-		var dest = host + rest + "/search?jql=project=" + project + "&maxResults=200";
+		var dest = host + rest + "/search?jql=project=" + "TODO" + "&maxResults=200";
 		callJira(dest, "GET").then(function (output){
 			res.send(extractIssues());
 			console.log(" status: 200 (sent)");
 		}).catch(function (output) {
 			console.log(colors.red(output));
+			res.send("errore");
 		});
 	}
 });
@@ -172,8 +178,10 @@ router.post("/edit/status", encoded, function(req, res){
 
     callJira(dest, "POST", data).then(function (output){
 		console.log(" status: 200 (sent)");
+		res.send("fatto");
 	}).catch(function (output) {
 		console.log(colors.red(output));
+		res.send("errore");
 	});
 });
 
@@ -195,8 +203,10 @@ router.put("/edit/summary", encoded, function(req, res){
 
     callJira(dest, "PUT", data).then(function (output){
 		console.log(" status: 200 (sent)");
+		res.send("fatto");
 	}).catch(function (output) {
 		console.log(colors.red(output));
+		res.send("errore");
 	});
 });
 
@@ -213,7 +223,7 @@ router.post("/add", encoded, function(req, res){
         "fields": {
             "project":
             {
-                "key": project
+                "key": "TODO" //project
             },
             "summary": req.body.summary,
             "description": "",
@@ -225,8 +235,10 @@ router.post("/add", encoded, function(req, res){
 
     callJira(dest, "POST", data).then(function (output){
 		console.log(" status: 200 (sent)");
+		res.send("fatto");
 	}).catch(function (output) {
 		console.log(colors.red(output));
+		res.send("errore");
 	});
 });
 
@@ -242,8 +254,10 @@ router.delete("/delete", encoded, function(req, res){
 
     callJira(dest, "DELETE").then(function (output){
 		console.log(" status: 200 (sent)");
+		res.send("fatto");
 	}).catch(function (output) {
 		console.log(colors.red(output));
+		res.send("errore");
 	});
 });
 

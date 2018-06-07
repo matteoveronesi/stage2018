@@ -88,3 +88,9 @@
 
   09:00 - 13:00 continuo implementazione base menu
   14:00 - 18:00 aggiunta chiamata di login e altre funzioni di accesso e salvataggio dei dati utente
+
+07/06/2018 [DAY 14] 
+
+  09:00 - 10:00 risoluzione della ripetizione delle chiamate
+  10:00 - 11:00 risoluzione bug menu
+  11:00 - 13:00 implementazione chiamate jira per i progetti disponibili

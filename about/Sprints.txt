@@ -52,3 +52,7 @@ Sprints
 06/06/2018 [DAY 13] 
 
   - Implemetare il menu di configurazione funzionante [FATTO]
+
+07/06/2018 [DAY 14]
+
+  - Implementare la visualizzazione di tutti i progetti disponibili + l'aggiunta di issue a un determinato progetto []

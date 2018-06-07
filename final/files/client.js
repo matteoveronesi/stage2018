@@ -5,12 +5,12 @@ $(document).ready(function(){
         type: "GET",
         url: "/rest/userdata",
         success: function(res){
-            $(".user_avatar").prop("src","http://stage.gnet.it/secure/useravatar?ownerId="+res);
+            $(".user_avatar").prop("src","http://stage.gnet.it/secure/useravatar?ownerId="+res[0]);
             $(".user_avatar").prop("class","user_avatar w3-circle");
-            $(".user_name").text(res);
+            $(".user_name").text(res[1]);
         },
-        error: function(){
-            //alert("not loaded.");
+        error: function(err){
+            console.log(err);
         }
     });
 
@@ -61,8 +61,15 @@ $(document).ready(function(){
             $.ajax({
             	type: "POST",
                 url: "/rest/add",
-                data: {/*"key": key.val(),*/"summary": summary.val(),"status": status}
-            }).done(refresh(2,2));
+                data: {/*"key": key.val(),*/"summary": summary.val(),"status": status},
+                success: function(res){
+                    console.log(res);
+                    refresh(2,2);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
 
             $("#iadd").toggle(100);
             //key.prop("value", "");
@@ -102,8 +109,15 @@ function status(n){
     $.ajax({
         type: "POST",
          url: "/rest/edit/status",
-         data: {"key": key.text(),"status": status_value}
-	}).done(/*refresh(2)*/);
+         data: {"key": key.text(),"status": status_value},
+         success: function(res){
+             console.log(res);
+             refresh(2);
+         },
+         error: function(err){
+             console.log(err);
+         }
+	});
 }
 
 function show(n){
@@ -123,8 +137,15 @@ function edit(n){
       	$.ajax({
       	     type: "PUT",
              url: "/rest/edit/summary",
-             data: {"key": key.text(),"summary": summary.val()}
-      	}).done(refresh(2,2));
+             data: {"key": key.text(),"summary": summary.val()},
+             success: function(res){
+                 console.log(res);
+                 refresh(2,2);
+             },
+             error: function(err){
+                 console.log(err);
+             }
+      	});
         $("#"+n).find(".edit").css("display","inline");
     }
     else{
@@ -138,6 +159,13 @@ function del(n){
     $.ajax({
          type: "DELETE",
          url: "/rest/delete",
-         data: {"key": key}
-    }).done(refresh(2,2));
+         data: {"key": key},
+         success: function(res){
+             console.log(res);
+             refresh(2,2);
+         },
+         error: function(err){
+             console.log(err);
+         }
+    });
 }
