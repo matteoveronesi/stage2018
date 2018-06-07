@@ -13,30 +13,43 @@ var tableToString; //html di output delle issue
 var login;
 var host;
 var rest = "/rest/api/latest";
-var projects;
+var projects = [];
 
 function getTime(){
 	return new Date().toLocaleTimeString();
 }
 
-function extractIssues(){
+function extractProjectsIssues(){
 	tableToString = "";
+	var c = 0;
 
-	for (var i = 0; i < tableData.total; i++){
-		tableToString += '<tr id="'+i+'">';
-		tableToString += '<td title="Cambia Status" onclick="status('+i+')" class="td-status"><i class="material-icons">';
-		if (tableData.issues[i].fields.status.name === "To Do")
-			tableToString += 'check_box_outline_blank';
-		else
-			tableToString += 'check_box';
-		tableToString += '</i></td>';
-		tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
-		tableToString += '<td title="Cambia Nome" class="td-name"><input onblur="edit('+i+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
-		tableToString += '<td class="icons"><i title="Conferma" onclick="edit('+i+')" class="material-icons edit">mode_edit</i> <i title="Elimina" onclick="del('+i+')" class="material-icons">delete</i></td>';
-		tableToString += '</tr>';
-	}
+	projects.forEach(function(p,i){
+		var dest = host + rest + "/search?jql=project=" + p + "&maxResults=200";
 
-	return tableToString;
+		callJira(dest, "GET").then(function (output){
+			for (var i = 0; i < tableData.total; i++,c++){
+				var max = c + tableData.total;
+				if (i == 0) tableToString += '<tr onclick="toggleProject('+c+','+max+')"><td colspan="4" class="project"><h6>'+p+'</h6></td></tr>';
+
+				tableToString += '<tr id="'+c+'">';
+				tableToString += '<td title="Cambia Status" onclick="status('+c+')" class="td-status"><i class="material-icons">';
+				if (tableData.issues[i].fields.status.name === "To Do")
+					tableToString += 'check_box_outline_blank';
+				else
+					tableToString += 'check_box';
+				tableToString += '</i></td>';
+				tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
+				tableToString += '<td title="Cambia Nome" class="td-name"><input onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
+				tableToString += '<td class="icons"><i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i> <i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
+				tableToString += '</tr>';
+			}
+
+			console.log(" status: " + p + " fatto.");
+		}).catch(function (output) {
+			console.log(colors.red(output));
+			res.send("errore " + p);
+		});
+	});
 }
 
 function getUserData(){
@@ -112,10 +125,24 @@ router.post("/login", encoded, function(req, res){
 			res.sendStatus(401);
 		else
 			res.sendStatus(200);
+
 		console.log(" status: 200 (sent)");
 	}).catch(function (output) {
 		console.log(colors.red(output));
-	})
+	});
+});
+
+
+router.get("/logout", function(req, res){
+	console.log("\n(" + getTime() + ")");
+    console.log(" REQUEST:".cyan);
+	console.log(" type: GET(logout)");
+    console.log(" url: " + req.headers.host + req.originalUrl);
+	console.log(" RESPONSE:".cyan);
+
+	setUserData("","","");
+	projects = [];
+	res.sendStatus(200);
 });
 
 router.get("/userdata", function(req, res){
@@ -126,6 +153,16 @@ router.get("/userdata", function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	if (login){
+		callJira(host + rest + "/project", "GET").then(function (output){
+			JSON.parse(output).forEach(function(p,i){
+				projects.push(p.key);
+				console.log(p.key);
+			});
+			console.log(" status: 200 (sent)");
+		}).catch(function (output) {
+			console.log(colors.red(output));
+		});
+
 		callJira(host + "/rest/api/latest/user?username=" + login.user, "GET").then(function (output){
 			res.send([login.user, JSON.parse(output).displayName]);
 		}).catch(function (output) {
@@ -139,24 +176,19 @@ router.get("/userdata", function(req, res){
 	}
 });
 
-router.get("/issues", function(req, res){
+router.get("/projects", function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: GET(load)");
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" RESPONSE:".cyan);
+	console.log(projects);
 
 	if (!login)
 		res.send("<h3>Nessun accesso effettuato.</h3>");
 	else{
-		var dest = host + rest + "/search?jql=project=" + "TODO" + "&maxResults=200";
-		callJira(dest, "GET").then(function (output){
-			res.send(extractIssues());
-			console.log(" status: 200 (sent)");
-		}).catch(function (output) {
-			console.log(colors.red(output));
-			res.send("errore");
-		});
+		extractProjectsIssues();
+		setTimeout(()=>res.send(tableToString),2000);
 	}
 });
 

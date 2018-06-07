@@ -21,6 +21,14 @@ table{
 	width: 350px;
 }
 
+.logout{
+	display: none;
+}
+
+.project{
+	width: 100%;
+}
+
 .sidebar-focus{
 	display: none;
 	position: fixed;
@@ -78,8 +86,9 @@ table{
 	color: #fff;
 }
 
-a:hover:not(.title){
-     text-shadow: 1px 1px 2px #2196F3;
+a:hover:not(.title), .project:hover{
+	cursor: pointer;
+    text-shadow: 1px 1px 2px #2196F3;
  }
 i:hover, .i:hover{
     cursor: pointer;

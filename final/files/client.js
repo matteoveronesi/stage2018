@@ -8,6 +8,8 @@ $(document).ready(function(){
             $(".user_avatar").prop("src","http://stage.gnet.it/secure/useravatar?ownerId="+res[0]);
             $(".user_avatar").prop("class","user_avatar w3-circle");
             $(".user_name").text(res[1]);
+            $(".login").toggle();
+            $(".logout").toggle();
         },
         error: function(err){
             console.log(err);
@@ -25,6 +27,26 @@ $(document).ready(function(){
 
     $("#load").click(function(){
         refresh(1,1);
+    });
+
+    $(".logout").click(function(){
+        $(".user_avatar").prop("src","guest_dark.svg");
+        $(".avatar_small").prop("src","guest.svg");
+        $(".user_avatar").prop("class","user_avatar");
+        $(".user_name").text("Accesso non effettuato.");
+        $.ajax({
+            type: "GET",
+            url: "/rest/logout",
+            success: function(res){
+                console.log(res);
+            },
+            error: function(){
+                console.log(err);
+            }
+        });
+        $("#content-table").html("");
+        $(".login").toggle();
+        $(".logout").toggle();
     });
 
     $("#login_done").click(function(){
@@ -83,10 +105,14 @@ $(document).ready(function(){
 function refresh(sec,opt){
     $("#logo").prop("src", "spin.svg");
     if (opt == 1)
-        $("#content-table").load("/rest/issues");
+        $("#content-table").load("/rest/projects");
     else if (opt == 2)
-        setTimeout(function(){$("#content-table").load("/rest/issues")}, 1100);
+        setTimeout(function(){$("#content-table").load("/rest/projects")}, 1100);
     setTimeout(function(){$("#logo").prop("src", "logo.png")}, sec*1100);
+}
+
+function toggleProject(start,end){
+    for (var n = start; n < end; n++) $("#"+n).toggle();
 }
 
 function status(n){
