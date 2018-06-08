@@ -97,3 +97,7 @@
   14:00 - 15:00 completamento visualizzazione issues divise per progetto
   15:00 - 16:00 aggiunta della funzione di log out
   16:00 - 18:00 aggiunta della scelta del progetto quando si crea una nuova issue
+
+08/06/2018 [DAY 15] 
+
+  09:00 - 11:00 miglioramento grafica progetti

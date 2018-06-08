@@ -111,8 +111,15 @@ function refresh(sec,opt){
     setTimeout(function(){$("#logo").prop("src", "logo.png")}, sec*1100);
 }
 
-function toggleProject(start,end){
-    for (var n = start; n < end; n++) $("#"+n).toggle();
+
+function toggleProject(start,end,project){
+    console.log($("#"+start).css("display") == "none");
+    if ($('#'+start).css("display") == "none")
+        $("#"+project).css("transform","rotate(90deg)");
+    else
+        $("#"+project).css("transform","rotate(360deg)");
+    for (var n = start; n < end; n++)
+        $("#"+n).toggle();
 }
 
 function status(n){

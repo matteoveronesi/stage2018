@@ -13,6 +13,11 @@ table{
 	margin-bottom: 70px;
 }
 
+h6 img{
+    -webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
 #iadd{
 	width: 100%;
 }
@@ -39,7 +44,7 @@ table{
 }
 
 .project{
-	width: 100%;
+	width: 100px;
 }
 
 .sidebar-focus{
@@ -99,13 +104,13 @@ table{
 	color: #fff;
 }
 
-a:hover:not(.title), .project:hover{
+a:hover:not(.title), h6:hover{
 	cursor: pointer;
     text-shadow: 1px 1px 2px #2196F3;
  }
 i:hover, .i:hover{
     cursor: pointer;
-    color:lightblue;
+    color: lightblue;
     text-shadow: 1px 1px 2px #2196F3;
 }
 

@@ -55,5 +55,10 @@ Sprints
 
 07/06/2018 [DAY 14]
 
-  - Implementare la visualizzazione di tutti i progetti disponibili + l'aggiunta di issue a un determinato progetto []
+  - Implementare la visualizzazione di tutti i progetti disponibili + l'aggiunta di issue a un determinato progetto [FATTO]
   - Implementare il log out [FATTO]
+
+08/06/2018 [DAY 15] 
+
+  - Migliorare la grafica dei progetti [FATTO]
+  - Refactorizzare la gestione della visualizzazione e del caricamento delle issue []
