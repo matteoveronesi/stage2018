@@ -95,6 +95,7 @@ function callJira(dest, type, data){
             auth: login,
             json: data
         }, function (err, res, body){
+		console.log(body);
             if (err)
                 reject(" ERROR: " + err);
             else{
@@ -113,12 +114,13 @@ function callJira(dest, type, data){
 }
 
 router.all("/:name", function (req, res, next) {
-	if(req.headers.host == "localhost:8080") next();
-	else{
-		console.log("\n(" + getTime() + ")");
-	    console.log(" UNAUTHORIZED REQUEST.".red);
-		res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
-	}
+	next();
+	// if(req.headers.host == "localhost:8080") next();
+	// else{
+	// 	console.log("\n(" + getTime() + ")");
+	//     console.log(" UNAUTHORIZED REQUEST.".red);
+	// 	res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
+	// }
 })
 
 router.post("/login", encoded, function(req, res){
@@ -133,6 +135,7 @@ router.post("/login", encoded, function(req, res){
 
 	setUserData(req.body.host, req.body.user, req.body.pass);
     var dest = req.body.host + rest + "/project";
+	console.log(login);
 	callJira(dest, "GET").then(function (output){
 		if (output == "denied")
 			res.sendStatus(401);

@@ -31,7 +31,7 @@ $(document).ready(function(){
     });
 
     $(".logout").click(function(){
-        $(".user_avatar").prop("src","guest_dark.svg");
+        $(".user_avatar:not(.avatar_small)").prop("src","guest_dark.svg");
         $(".avatar_small").prop("src","guest.svg");
         $(".user_avatar").prop("class","user_avatar");
         $(".user_name").text("Accesso non effettuato.");
