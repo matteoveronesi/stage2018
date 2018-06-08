@@ -16,6 +16,8 @@ var rest = "/rest/api/latest";
 var projects = [];
 var projectsName = [];
 
+getUserData();
+
 function getTime(){
 	return new Date().toLocaleTimeString();
 }
@@ -107,9 +109,7 @@ function callJira(dest, type, data){
 }
 
 router.all('/:name', function (req, res, next) {
-	getUserData();
-	// setTimeout(()=>next(),500);
-	if(req.headers.host == "localhost:8080") setTimeout(()=>next(),500);
+	if(req.headers.host == "localhost:8080") next();
 	else{
 		console.log("\n(" + getTime() + ")");
 	    console.log(" UNAUTHORIZED REQUEST.".red);
