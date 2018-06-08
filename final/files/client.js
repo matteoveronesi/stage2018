@@ -1,15 +1,16 @@
 $(document).ready(function(){
-    refresh(1,1);
 
     $.ajax({
         type: "GET",
         url: "/rest/userdata",
-        success: function(res){
-            $(".user_avatar").prop("src","http://stage.gnet.it/secure/useravatar?ownerId="+res[0]);
+        success: function(res){ //res = [ utente, nome completo, host]
+            $(".user_avatar").prop("src",res[2]+"/secure/useravatar?ownerId="+res[0]);
             $(".user_avatar").prop("class","user_avatar w3-circle");
+            $(".user_profile").prop("href",res[2]+"/secure/ViewProfile.jspa");
             $(".user_name").text(res[1]);
             $(".login").toggle();
             $(".logout").toggle();
+            refresh(1,1);
         },
         error: function(err){
             console.log(err);
@@ -34,6 +35,7 @@ $(document).ready(function(){
         $(".avatar_small").prop("src","guest.svg");
         $(".user_avatar").prop("class","user_avatar");
         $(".user_name").text("Accesso non effettuato.");
+        $(".user_profile").prop("href","");
         $.ajax({
             type: "GET",
             url: "/rest/logout",

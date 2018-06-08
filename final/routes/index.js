@@ -176,7 +176,7 @@ router.get("/userdata", function(req, res){
 		});
 
 		callJira(host + "/rest/api/latest/user?username=" + login.user, "GET").then(function (output){
-			res.send([login.user, JSON.parse(output).displayName]);
+			res.send([login.user, JSON.parse(output).displayName,host]);
 		}).catch(function (output) {
 			console.log(colors.red(output));
 		});
