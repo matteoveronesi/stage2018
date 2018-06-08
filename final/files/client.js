@@ -159,6 +159,13 @@ function hide(n){
     setTimeout(()=>$("#"+n).find(".edit").css("display","none"),150);
 }
 
+function editFromKey(key,n){
+    if (key == 13){
+        $("#"+n).find(".td-name").find("input").blur();
+        edit(n);
+    }
+}
+
 function edit(n){
     var obj = $("#"+n);
     var key = obj.find(".td-key").find("a");

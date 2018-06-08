@@ -43,9 +43,10 @@ function extractProjectsIssues(){
 					tableToString += 'check_box';
 				tableToString += '</i></td>';
 				tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
-				tableToString += '<td title="Cambia Nome" class="td-name"><input onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
-				tableToString += '<td class="icons"><i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i> <i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
+				tableToString += '<td title="Cambia Nome" class="td-name"><input onkeydown="editFromKey(event.which,'+c+')" onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
+				tableToString += '<td class="icons"><i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
 				tableToString += '</tr>';
+				// <i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i>
 			}
 
 			console.log(" status: " + p + " fatto.");
@@ -107,9 +108,13 @@ function callJira(dest, type, data){
 
 router.all('/:name', function (req, res, next) {
 	getUserData();
-
+	// setTimeout(()=>next(),500);
 	if(req.headers.host == "localhost:8080") setTimeout(()=>next(),500);
-	else res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
+	else{
+		console.log("\n(" + getTime() + ")");
+	    console.log(" UNAUTHORIZED REQUEST.".red);
+		res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
+	}
 })
 
 router.post("/login", encoded, function(req, res){

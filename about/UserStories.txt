@@ -8,5 +8,5 @@ USER STORIES
 - Y - 3 - Grafica minima per la parte ui
 - Y - 6 - Implementazione dei REST sulla ui
 - Y - 7 - Grafica avanzata e carina (anche personalizzabile)
-- 7 - Avere nell'elenco tutti i progetti raggruppabili
+- Y - 7 - Avere nell'elenco tutti i progetti raggruppabili
 - Y - 8 - Menu con impostazioni varie (utente,preferenze, ecc)

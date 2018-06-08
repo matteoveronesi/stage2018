@@ -101,3 +101,4 @@
 08/06/2018 [DAY 15] 
 
   09:00 - 11:00 miglioramento grafica progetti
+  11:00 - 13:00 risoluzione bug
