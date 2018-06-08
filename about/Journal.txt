@@ -102,3 +102,4 @@
 
   09:00 - 11:00 miglioramento grafica progetti
   11:00 - 13:00 risoluzione bug
+  14:00 - 15:00 risoluzione caricamento brutto e lento

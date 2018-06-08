@@ -61,4 +61,4 @@ Sprints
 08/06/2018 [DAY 15] 
 
   - Migliorare la grafica dei progetti [FATTO]
-  - Debug generale + risolvere i bug principali (es la matita e la conferma della modifica e il caricamento delle issue) []
+  - Debug generale + risolvere i bug principali (es la matita e la conferma della modifica e il caricamento delle issue) [FATTO]

@@ -26,35 +26,39 @@ function extractProjectsIssues(){
 	tableToString = "";
 	var c = 0;
 
-	projects.forEach(function(p,j){
-		var dest = host + rest + "/search?jql=project=" + p + "&maxResults=200";
+	return new Promise( function (resolve, reject) {
+		projects.forEach(function(p,j){
+			var dest = host + rest + "/search?jql=project=" + p + "&maxResults=200";
+			console.log(p);
+			callJira(dest, "GET").then(function (output){
+				for (var i = 0; i < tableData.total; i++,c++){
+					var max = c + tableData.total +1;
+					if (i == 0){
+						var cp = c+1;
+						tableToString += '<tr onclick="toggleProject('+cp+','+max+','+c+')"><td colspan="3"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td></tr>';
+						++c;
+					}
+					tableToString += '<tr id="'+c+'">';
+					tableToString += '<td title="Cambia Status" onclick="status('+c+')" class="td-status"><i class="material-icons">';
+					if (tableData.issues[i].fields.status.name === "To Do")
+						tableToString += 'check_box_outline_blank';
+					else
+						tableToString += 'check_box';
+					tableToString += '</i></td>';
+					tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
+					tableToString += '<td title="Cambia Nome" class="td-name"><input onkeydown="editFromKey(event.which,'+c+')" onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
+					tableToString += '<td class="icons"><i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
+					tableToString += '</tr>';
+					// <i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i>
 
-		callJira(dest, "GET").then(function (output){
-			for (var i = 0; i < tableData.total; i++,c++){
-				var max = c + tableData.total +1;
-				if (i == 0){
-					var cp = c+1;
-					tableToString += '<tr onclick="toggleProject('+cp+','+max+','+c+')"><td colspan="3"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td></tr>';
-					++c;
 				}
-				tableToString += '<tr id="'+c+'">';
-				tableToString += '<td title="Cambia Status" onclick="status('+c+')" class="td-status"><i class="material-icons">';
-				if (tableData.issues[i].fields.status.name === "To Do")
-					tableToString += 'check_box_outline_blank';
-				else
-					tableToString += 'check_box';
-				tableToString += '</i></td>';
-				tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
-				tableToString += '<td title="Cambia Nome" class="td-name"><input onkeydown="editFromKey(event.which,'+c+')" onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
-				tableToString += '<td class="icons"><i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
-				tableToString += '</tr>';
-				// <i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i>
-			}
-
-			console.log(" status: " + p + " fatto.");
-		}).catch(function (output) {
-			console.log(colors.red(output));
-			res.send("errore " + p);
+				if (++j == projects.length) resolve("ok");
+				console.log(" status: " + p + " fatto.");
+			}).catch(function (output) {
+				console.log(colors.red(output));
+				reject("error");
+				res.send("errore " + p);
+			});
 		});
 	});
 }
@@ -108,7 +112,7 @@ function callJira(dest, type, data){
     });
 }
 
-router.all('/:name', function (req, res, next) {
+router.all("/:name", function (req, res, next) {
 	if(req.headers.host == "localhost:8080") next();
 	else{
 		console.log("\n(" + getTime() + ")");
@@ -191,15 +195,19 @@ router.get("/userdata", function(req, res){
 router.get("/projects", function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
-	console.log(" type: GET(load)");
+	console.log(" type: GET(projects)");
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" RESPONSE:".cyan);
 
 	if (!login)
 		res.send("<tr><td><h3>Accesso non effettuato.</h3></td></tr>");
 	else{
-		extractProjectsIssues();
-		setTimeout(()=>res.send(tableToString),2000);
+		extractProjectsIssues().then(function (output){
+			console.log(" status: 200 (sent projects)");
+			res.send(tableToString);
+		}).catch(function (output) {
+			console.log(colors.red(output));
+		});
 	}
 	console.log(" status: 200 (sent)");
 });
