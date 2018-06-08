@@ -14,6 +14,7 @@ var login;
 var host;
 var rest = "/rest/api/latest";
 var projects = [];
+var projectsName = [];
 
 function getTime(){
 	return new Date().toLocaleTimeString();
@@ -23,7 +24,7 @@ function extractProjectsIssues(){
 	tableToString = "";
 	var c = 0;
 
-	projects.forEach(function(p,i){
+	projects.forEach(function(p,j){
 		var dest = host + rest + "/search?jql=project=" + p + "&maxResults=200";
 
 		callJira(dest, "GET").then(function (output){
@@ -31,7 +32,7 @@ function extractProjectsIssues(){
 				var max = c + tableData.total +1;
 				if (i == 0){
 					var cp = c+1;
-					tableToString += '<tr onclick="toggleProject('+cp+','+max+','+c+')"><td class="project"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+p+'</h6></td></tr>';
+					tableToString += '<tr onclick="toggleProject('+cp+','+max+','+c+')"><td colspan="3"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td></tr>';
 					++c;
 				}
 				tableToString += '<tr id="'+c+'">';
@@ -145,6 +146,7 @@ router.get("/logout", function(req, res){
 
 	setUserData("","","");
 	projects = [];
+	projectsName = [];
 	res.sendStatus(200);
 });
 
@@ -158,11 +160,12 @@ router.get("/userdata", function(req, res){
 	if (login){
 		callJira(host + rest + "/project", "GET").then(function (output){
 			projects = [];
+			projectsName = [];
 			JSON.parse(output).forEach(function(p,i){
 				projects.push(p.key);
-				console.log(p.key);
+				projectsName.push(p.name);
 			});
-			console.log(" status: 200 (sent)");
+			console.log(" PROJECTS: status: 200 (sent)");
 		}).catch(function (output) {
 			console.log(colors.red(output));
 		});
@@ -172,7 +175,7 @@ router.get("/userdata", function(req, res){
 		}).catch(function (output) {
 			console.log(colors.red(output));
 		});
-		console.log(" status: 200 (sent)");
+		console.log(" USERDATA: status: 200 (sent)");
 	}
 	else{
 		console.log(" ERROR: 401 Unauthorized.".red);
