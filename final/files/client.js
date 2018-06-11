@@ -1,23 +1,8 @@
 $(document).ready(function(){
 
-    getUserData();
+    if(localStorage.getItem("user")) $(".login-page").toggle();
 
-    // $.ajax({
-    //     type: "GET",
-    //     url: "/rest/userdata",
-    //     success: function(res){ //res = [ utente, nome completo, host]
-    //         $(".user_avatar").prop("src",res[2]+"/secure/useravatar?ownerId="+res[0]);
-    //         $(".user_avatar").prop("class","user_avatar w3-circle");
-    //         $(".user_profile").prop("href",res[2]+"/secure/ViewProfile.jspa");
-    //         $(".user_name").text(res[1]);
-    //         $(".login").toggle();
-    //         $(".logout").toggle();
-    //         refresh(1,1);
-    //     },
-    //     error: function(err){
-    //         console.log(err);
-    //     }
-    // });
+    getUserData();
 
     $(".show-add").click(function(){
         $("#iadd").toggle(100);
@@ -50,12 +35,20 @@ function refresh(sec,opt){
     var user = localStorage.getItem("user");
     var pass = localStorage.getItem("pass");
     var host = localStorage.getItem("host");
+    var projects = localStorage.getItem("projects");
+    var projectsName = localStorage.getItem("projectsName");
 
     if (opt == 1)
         $.ajax({
             type: "POST",
             url: "/rest/projects",
-            data: {"user": user, "pass": pass, "host": host},
+            data: {
+                "user": user,
+                "pass": pass,
+                "host": host,
+                "projects": projects,
+                "projectsName": projectsName
+            },
             success: function(res){
                 $("#content-table").html(res);
             },
@@ -67,7 +60,13 @@ function refresh(sec,opt){
         setTimeout(()=>$.ajax({
             type: "POST",
             url: "/rest/projects",
-            data: {"user": user, "pass": pass, "host": host},
+            data: {
+                "user": user,
+                "pass": pass,
+                "host": host,
+                "projects": projects,
+                "projectsName": projectsName
+            },
             success: function(res){
                 $("#content-table").html(res);
             },
@@ -110,18 +109,22 @@ function setUserData(){
             type: "POST",
             url: "/rest/login",
             data: {"user": user, "pass": pass, "host": host},
-            success: function(res){
+            success: function(res){ //res = { nome utente, key progetti, nome progetti }
                 $("#login_user").val("");
                 $("#login_pass").val("");
                 $("#login_host").val("");
+                $(".login-page").toggle();
 
+                localStorage.setItem("projects", JSON.stringify(res.projects));
+                localStorage.setItem("projectsName",  JSON.stringify(res.projectsName));
                 localStorage.setItem("user", user);
-                localStorage.setItem("name", user);
+                localStorage.setItem("name", res.name);
                 localStorage.setItem("pass", pass);
                 localStorage.setItem("host", host);
                 location.reload();
             },
-            error: function(){
+            error: function(err){
+                console.log(err);
                 alert("Qualcosa non ha funzionato.");
             }
         });
@@ -134,23 +137,16 @@ function deleteUserData() {
     localStorage.removeItem("name");
     localStorage.removeItem("pass");
     localStorage.removeItem("host");
+    localStorage.removeItem("projects");
+    localStorage.removeItem("projectsName");
 
     $(".user_avatar:not(.avatar_small)").prop("src","guest_dark.svg");
     $(".avatar_small").prop("src","guest.svg");
     $(".user_avatar").prop("class","user_avatar");
     $(".user_name").text("Accesso non effettuato.");
     $(".user_profile").prop("href","");
-    $.ajax({
-        type: "GET",
-        url: "/rest/logout",
-        success: function(res){
-            console.log(res);
-        },
-        error: function(){
-            console.log(err);
-        }
-    });
     $("#content-table").html("");
+    $(".login-page").toggle();
     $(".login").toggle();
     $(".logout").toggle();
 }
@@ -186,7 +182,6 @@ function addIssue() {
 }
 
 function toggleProject(start,end,project){
-    console.log($("#"+start).css("display") == "none");
     if ($('#'+start).css("display") == "none")
         $("#"+project).css("transform","rotate(90deg)");
     else

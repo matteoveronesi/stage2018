@@ -109,3 +109,4 @@
 
   09:00 - 09:30 punto della situazione, organizzazione delle cose da fare
   09:30 - 13:00 Implementazione del localstorage per il login
+  14:00 - 18:00 Implementazione del localstorage per i dati utente

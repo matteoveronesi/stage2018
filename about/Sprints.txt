@@ -65,5 +65,4 @@ Sprints
 
 11/06/2018 [DAY 16]
 
-  - Spostare i dati di login nel localstorage []
-  - Implementare la scelta dei progetti []
+  - Spostare i dati di login nel localstorage [FATTO]

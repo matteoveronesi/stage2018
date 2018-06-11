@@ -49,3 +49,5 @@ OTHER
 https://icons8.com
 
 https://loading.io
+
+https://uigradients.com

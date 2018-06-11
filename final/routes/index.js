@@ -6,25 +6,21 @@ const router = express.Router();
 const encoded = parser.urlencoded({ extended: false });
 
 var tableData; //JSON delle issue del progetto
-var tableToString; //html di output delle issue
-
-/* DATI UTENTE */
-var rest = "/rest/api/latest";
-var projects = ["STAG","DEV","TODO"];
-var projectsName = ["Stage","Sviluppo Software","Todo List"];
+var tableToString; //html di body delle issue
+var rest = "/rest/api/latest"; //api rest di jira
 
 function getTime(){
 	return new Date().toLocaleTimeString();
 }
 
-function extractProjectsIssues(login, host){
+function extractProjectsIssues(login, host, projects, projectsName){
 	tableToString = "";
 	var c = 0;
 	return new Promise( function (resolve, reject) {
 		projects.forEach(function(p,j){
 			var dest = host + rest + "/search?jql=project=" + p + "&maxResults=200";
 
-			callJira(login, dest, "GET").then(function (output){
+			callJira(login, dest, "GET").then(function (body){
 				for (var i = 0; i < tableData.total; i++,c++){
 					var max = c + tableData.total +1;
 					if (i == 0){
@@ -48,8 +44,8 @@ function extractProjectsIssues(login, host){
 				}
 				if (++j == projects.length) resolve("ok");
 				console.log(" status: " + p + " fatto.");
-			}).catch(function (output) {
-				console.log(colors.red(output));
+			}).catch(function (body) {
+				console.log(colors.red(body));
 				reject("error");
 			});
 		});
@@ -83,7 +79,7 @@ function callJira(login, dest, type, data){
 
 router.all("/:name", function (req, res, next) {
 	// next();
-	if(req.headers.host == "localhost:8080") next();
+	if(req.headers.host == "localhost:9000") next();
 	else{
 		console.log("\n(" + getTime() + ")");
 	    console.log(" UNAUTHORIZED REQUEST.".red);
@@ -101,64 +97,34 @@ router.post("/login", encoded, function(req, res){
     console.log(" pass: " + req.body.pass);
 	console.log(" RESPONSE:".cyan);
 
-	var login = {"user": req.body.user,"pass": req.body.pass}
+	var login = {"user": req.body.user,"pass": req.body.pass};
     var dest = req.body.host + rest + "/project";
+	var projects = [];
+	var projectsName = [];
+	callJira(login, dest, "GET").then(function (body){
+		if (body == "denied")
+			res.sendStatus(400);
+		else{
+			JSON.parse(body).forEach(function(p,i){
+				projects.push(p.key);
+				projectsName.push(p.name);
 
-	callJira(login, dest, "GET").then(function (output){
-		if (output == "denied")
-			res.sendStatus(401);
-		else
-			res.sendStatus(200);
+				if (++i == JSON.parse(body).length){
+					var dest = req.body.host + "/rest/api/latest/user?username=" + login.user;
+
+					callJira(login, dest, "GET").then(function (body){
+						res.send({"projects": projects, "projectsName": projectsName, "name": JSON.parse(body).displayName});
+					}).catch(function (body) {
+						console.log(colors.red(body));
+					});
+				}
+			});
+		}
 		console.log(" status: 200 (sent)");
-	}).catch(function (output) {
-		console.log(colors.red(output));
+	}).catch(function (body) {
+		console.log(colors.red(body));
 	});
 });
-
-router.get("/logout", function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
-	console.log(" type: GET(logout)");
-    console.log(" url: " + req.headers.host + req.originalUrl);
-	console.log(" RESPONSE:".cyan);
-
-	projects = [];
-	projectsName = [];
-	res.sendStatus(200);
-});
-
-// router.get("/userdata", function(req, res){
-// 	console.log("\n(" + getTime() + ")");
-//     console.log(" REQUEST:".cyan);
-// 	console.log(" type: GET(userdata)");
-//     console.log(" url: " + req.headers.host + req.originalUrl);
-// 	console.log(" RESPONSE:".cyan);
-//
-// 	if (login){
-// 		callJira(host + rest + "/project", "GET").then(function (output){
-// 			projects = [];
-// 			projectsName = [];
-// 			JSON.parse(output).forEach(function(p,i){
-// 				projects.push(p.key);
-// 				projectsName.push(p.name);
-// 			});
-// 			console.log(" PROJECTS: status: 200 (sent)");
-// 		}).catch(function (output) {
-// 			console.log(colors.red(output));
-// 		});
-//
-// 		callJira(host + "/rest/api/latest/user?username=" + login.user, "GET").then(function (output){
-// 			res.send([login.user, JSON.parse(output).displayName,host]);
-// 		}).catch(function (output) {
-// 			console.log(colors.red(output));
-// 		});
-// 		console.log(" USERDATA: status: 200 (sent)");
-// 	}
-// 	else{
-// 		console.log(" ERROR: 401 Unauthorized.".red);
-// 		res.sendStatus(401);
-// 	}
-// });
 
 router.post("/projects", encoded, function(req, res){
 	console.log("\n(" + getTime() + ")");
@@ -167,13 +133,13 @@ router.post("/projects", encoded, function(req, res){
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" RESPONSE:".cyan);
 
-	var login = {"user": req.body.user,"pass": req.body.pass}
-
-	extractProjectsIssues(login, req.body.host).then(function (output){
+	var login = {"user": req.body.user,"pass": req.body.pass};
+console.log(req.body);
+	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects), JSON.parse(req.body.projectsName)).then(function (body){
 		console.log(" status: 200 (sent projects)");
 		res.send(tableToString);
-	}).catch(function (output) {
-		console.log(colors.red(output));
+	}).catch(function (body) {
+		console.log(colors.red(body));
 	});
 
 	console.log(" status: 200 (sent)");
@@ -188,7 +154,7 @@ router.post("/edit/status", encoded, function(req, res){
     console.log(" status: " + req.body.status);
 	console.log(" RESPONSE:".cyan);
 
-	var login = {"user": req.body.user,"pass": req.body.pass}
+	var login = {"user": req.body.user,"pass": req.body.pass};
     var dest = req.body.host + rest + "/issue/" + req.body.key + "/transitions";
     var data = {
         "transition": {
@@ -196,11 +162,11 @@ router.post("/edit/status", encoded, function(req, res){
         }
     };
 
-    callJira(login, dest, "POST", data).then(function (output){
+    callJira(login, dest, "POST", data).then(function (body){
 		console.log(" status: 200 (sent)");
 		res.send("fatto");
-	}).catch(function (output) {
-		console.log(colors.red(output));
+	}).catch(function (body) {
+		console.log(colors.red(body));
 		res.send("errore");
 	});
 });
@@ -214,7 +180,7 @@ router.put("/edit/summary", encoded, function(req, res){
     console.log(" summary: " + req.body.summary);
 	console.log(" RESPONSE:".cyan);
 
-	var login = {"user": req.body.user,"pass": req.body.pass}
+	var login = {"user": req.body.user,"pass": req.body.pass};
     var dest = req.body.host + rest + "/issue/" + req.body.key;
     var data = {
         "fields": {
@@ -222,11 +188,11 @@ router.put("/edit/summary", encoded, function(req, res){
         }
     };
 
-    callJira(login, dest, "PUT", data).then(function (output){
+    callJira(login, dest, "PUT", data).then(function (body){
 		console.log(" status: 200 (sent)");
 		res.send("fatto");
-	}).catch(function (output) {
-		console.log(colors.red(output));
+	}).catch(function (body) {
+		console.log(colors.red(body));
 		res.send("errore");
 	});
 });
@@ -240,7 +206,7 @@ router.post("/add", encoded, function(req, res){
     console.log(" summary: " + req.body.summary);
 	console.log(" RESPONSE:".cyan);
 
-	var login = {"user": req.body.user,"pass": req.body.pass}
+	var login = {"user": req.body.user,"pass": req.body.pass};
     var dest = req.body.host + rest + "/issue";
     var data = {
         "fields": {
@@ -256,11 +222,11 @@ router.post("/add", encoded, function(req, res){
         }
     };
 
-    callJira(login, dest, "POST", data).then(function (output){
+    callJira(login, dest, "POST", data).then(function (body){
 		console.log(" status: 200 (sent)");
 		res.send("fatto");
-	}).catch(function (output) {
-		console.log(colors.red(output));
+	}).catch(function (body) {
+		console.log(colors.red(body));
 		res.send("errore");
 	});
 });
@@ -273,14 +239,14 @@ router.delete("/delete", encoded, function(req, res){
 	console.log(" key: " + req.body.key);
 	console.log(" RESPONSE:".cyan);
 
-	var login = {"user": req.body.user,"pass": req.body.pass}
+	var login = {"user": req.body.user,"pass": req.body.pass};
     var dest = req.body.host + rest + "/issue/" + req.body.key;
 
-    callJira(login, dest, "DELETE").then(function (output){
+    callJira(login, dest, "DELETE").then(function (body){
 		console.log(" status: 200 (sent)");
 		res.send("fatto");
-	}).catch(function (output) {
-		console.log(colors.red(output));
+	}).catch(function (body) {
+		console.log(colors.red(body));
 		res.send("errore");
 	});
 });

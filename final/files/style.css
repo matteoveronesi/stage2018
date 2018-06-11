@@ -39,6 +39,24 @@ h6 img{
 	left: 400px;
 }
 
+.login-page{
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	z-index: 2;
+	padding: 15%;
+	background: #fff;
+	background: linear-gradient(to bottom right, #2C5364, #203A43);
+}
+
+.login{
+	background: #fff;
+	border-radius: 5px;
+	padding: 10px;
+}
+
 .logout{
 	display: none;
 }
