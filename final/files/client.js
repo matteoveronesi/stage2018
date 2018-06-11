@@ -1,21 +1,23 @@
 $(document).ready(function(){
 
-    $.ajax({
-        type: "GET",
-        url: "/rest/userdata",
-        success: function(res){ //res = [ utente, nome completo, host]
-            $(".user_avatar").prop("src",res[2]+"/secure/useravatar?ownerId="+res[0]);
-            $(".user_avatar").prop("class","user_avatar w3-circle");
-            $(".user_profile").prop("href",res[2]+"/secure/ViewProfile.jspa");
-            $(".user_name").text(res[1]);
-            $(".login").toggle();
-            $(".logout").toggle();
-            refresh(1,1);
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
+    getUserData();
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/rest/userdata",
+    //     success: function(res){ //res = [ utente, nome completo, host]
+    //         $(".user_avatar").prop("src",res[2]+"/secure/useravatar?ownerId="+res[0]);
+    //         $(".user_avatar").prop("class","user_avatar w3-circle");
+    //         $(".user_profile").prop("href",res[2]+"/secure/ViewProfile.jspa");
+    //         $(".user_name").text(res[1]);
+    //         $(".login").toggle();
+    //         $(".logout").toggle();
+    //         refresh(1,1);
+    //     },
+    //     error: function(err){
+    //         console.log(err);
+    //     }
+    // });
 
     $(".show-add").click(function(){
         $("#iadd").toggle(100);
@@ -30,89 +32,158 @@ $(document).ready(function(){
         refresh(1,1);
     });
 
-    $(".logout").click(function(){
-        $(".user_avatar:not(.avatar_small)").prop("src","guest_dark.svg");
-        $(".avatar_small").prop("src","guest.svg");
-        $(".user_avatar").prop("class","user_avatar");
-        $(".user_name").text("Accesso non effettuato.");
-        $(".user_profile").prop("href","");
-        $.ajax({
-            type: "GET",
-            url: "/rest/logout",
-            success: function(res){
-                console.log(res);
-            },
-            error: function(){
-                console.log(err);
-            }
-        });
-        $("#content-table").html("");
-        $(".login").toggle();
-        $(".logout").toggle();
+    $("#login_done").click(function(){
+        setUserData();
     });
 
-    $("#login_done").click(function(){
-        var user = $("#login_user").val();
-        var pass = $("#login_pass").val();
-        var host = $("#login_host").val();
-
-        if (user.length > 0 && pass.length > 0 && host.length > 0){
-            $.ajax({
-            	type: "POST",
-                url: "/rest/login",
-                data: {"user": user, "pass": pass, "host": host},
-                success: function(res){
-                    $("#login_user").val("");
-                    $("#login_pass").val("");
-                    $("#login_host").val("");
-                    location.reload();
-                },
-                error: function(){
-                    alert("I dati inseriti non sono corretti.");
-                }
-            });
-        }
-        else alert("aghh");
-
+    $(".logout").click(function(){
+        deleteUserData();
     });
 
     $("#new-add").click(function(){
-        var key = $("#new-key");
-        var summary = $("#new-name");
-        var status = "Todo";
-
-        if(key.val().length > 0 && summary.val().length > 0){
-            $.ajax({
-            	type: "POST",
-                url: "/rest/add",
-                data: {"key": key.val(),"summary": summary.val(),"status": status},
-                success: function(res){
-                    console.log(res);
-                    refresh(2,2);
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            });
-
-            $("#iadd").toggle(100);
-            //key.prop("value", "");
-            summary.prop("value", "");
-        }
-        else{
-        }
+        addIssue();
     });
 });
 
 function refresh(sec,opt){
     $("#logo").prop("src", "spin.svg");
+    var user = localStorage.getItem("user");
+    var pass = localStorage.getItem("pass");
+    var host = localStorage.getItem("host");
+
     if (opt == 1)
-        $("#content-table").load("/rest/projects");
+        $.ajax({
+            type: "POST",
+            url: "/rest/projects",
+            data: {"user": user, "pass": pass, "host": host},
+            success: function(res){
+                $("#content-table").html(res);
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
     else if (opt == 2)
-        setTimeout(function(){$("#content-table").load("/rest/projects")}, 1100);
-    setTimeout(function(){$("#logo").prop("src", "logo.png")}, sec*1100);
+        setTimeout(()=>$.ajax({
+            type: "POST",
+            url: "/rest/projects",
+            data: {"user": user, "pass": pass, "host": host},
+            success: function(res){
+                $("#content-table").html(res);
+            },
+            error: function(err){
+                console.log(err);
+            }
+        }), 1100);
+    setTimeout(()=>$("#logo").prop("src", "logo.png"), sec*1100);
 }
 
+function getUserData(){
+    if (typeof(Storage) !== "undefined") {
+        // Store
+        //localStorage.setItem("username", "Smoth");
+        // Retrieve
+        //res = [ utente, nome completo, host]
+        var user = localStorage.getItem("user");
+        if (user){
+            var name = localStorage.getItem("name");
+            var pass = localStorage.getItem("pass");
+            var host = localStorage.getItem("host");
+            $(".user_avatar").prop("src", host+"/secure/useravatar?ownerId="+user);
+            $(".user_avatar").prop("class", "user_avatar w3-circle");
+            $(".user_profile").prop("href", host+"/secure/ViewProfile.jspa");
+            $(".user_name").text(name);
+            $(".login").toggle();
+            $(".logout").toggle();
+            refresh(1,1);
+        }
+    }
+}
+
+function setUserData(){
+    var user = $("#login_user").val();
+    var pass = $("#login_pass").val();
+    var host = $("#login_host").val();
+
+    if (user.length > 0 && pass.length > 0 && host.length > 0){
+        $.ajax({
+            type: "POST",
+            url: "/rest/login",
+            data: {"user": user, "pass": pass, "host": host},
+            success: function(res){
+                $("#login_user").val("");
+                $("#login_pass").val("");
+                $("#login_host").val("");
+
+                localStorage.setItem("user", user);
+                localStorage.setItem("name", user);
+                localStorage.setItem("pass", pass);
+                localStorage.setItem("host", host);
+                location.reload();
+            },
+            error: function(){
+                alert("Qualcosa non ha funzionato.");
+            }
+        });
+    }
+    else alert("Compila tutti i campi.");
+}
+
+function deleteUserData() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("name");
+    localStorage.removeItem("pass");
+    localStorage.removeItem("host");
+
+    $(".user_avatar:not(.avatar_small)").prop("src","guest_dark.svg");
+    $(".avatar_small").prop("src","guest.svg");
+    $(".user_avatar").prop("class","user_avatar");
+    $(".user_name").text("Accesso non effettuato.");
+    $(".user_profile").prop("href","");
+    $.ajax({
+        type: "GET",
+        url: "/rest/logout",
+        success: function(res){
+            console.log(res);
+        },
+        error: function(){
+            console.log(err);
+        }
+    });
+    $("#content-table").html("");
+    $(".login").toggle();
+    $(".logout").toggle();
+}
+
+function addIssue() {
+    var key = $("#new-key");
+    var summary = $("#new-name");
+    var status = "Todo";
+    var user = localStorage.getItem("user");
+    var pass = localStorage.getItem("pass");
+    var host = localStorage.getItem("host");
+
+    if(key.val().length > 0 && summary.val().length > 0){
+        $.ajax({
+            type: "POST",
+            url: "/rest/add",
+            data: {"user": user, "pass": pass, "host": host, "key": key.val(),"summary": summary.val(),"status": status},
+            success: function(res){
+                console.log(res);
+                refresh(2,2);
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+        $("#iadd").toggle(100);
+        //key.prop("value", "");
+        summary.prop("value", "");
+    }
+    else{
+    }
+}
 
 function toggleProject(start,end,project){
     console.log($("#"+start).css("display") == "none");
@@ -129,6 +200,9 @@ function status(n){
     var key = obj.find(".td-key").find("a");
     var status = obj.find(".td-status").find("i");
     var status_value = "";
+    var user = localStorage.getItem("user");
+    var pass = localStorage.getItem("pass");
+    var host = localStorage.getItem("host");
 
     if (status.text() === "check_box"){
         status_value = "51"; //todo
@@ -142,7 +216,7 @@ function status(n){
     $.ajax({
         type: "POST",
          url: "/rest/edit/status",
-         data: {"key": key.text(),"status": status_value},
+         data: {"user": user, "pass": pass, "host": host, "key": key.text(), "status": status_value},
          success: function(res){
              console.log(res);
              refresh(2);
@@ -172,12 +246,15 @@ function edit(n){
     var obj = $("#"+n);
     var key = obj.find(".td-key").find("a");
     var summary = obj.find(".td-name").find("input");
+    var user = localStorage.getItem("user");
+    var pass = localStorage.getItem("pass");
+    var host = localStorage.getItem("host");
 
     if(summary.val().length > 0 && summary.val() != summary.prop("placeholder")){
       	$.ajax({
       	     type: "PUT",
              url: "/rest/edit/summary",
-             data: {"key": key.text(),"summary": summary.val()},
+             data: {"user": user, "pass": pass, "host": host, "key": key.text(), "summary": summary.val()},
              success: function(res){
                  console.log(res);
                  refresh(2,2);
@@ -194,10 +271,14 @@ function edit(n){
 
 function del(n){
     var key = $("#"+n).find(".td-key").find("a").text();
+    var user = localStorage.getItem("user");
+    var pass = localStorage.getItem("pass");
+    var host = localStorage.getItem("host");
+
     $.ajax({
          type: "DELETE",
          url: "/rest/delete",
-         data: {"key": key},
+         data: {"user": user, "pass": pass, "host": host, "key": key},
          success: function(res){
              console.log(res);
              refresh(2,2);
