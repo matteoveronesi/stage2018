@@ -1,0 +1,14 @@
+Cose rimaste da fare e/o interessanti da fare ( 11/06 )
+
+ IMPROVEMENTS
+ - Spostare i dati sul localstorage 
+ - Introdurre una scelta dei progetti da visualizzare
+ - Nascondere le issue completate
+ - Rifare da 0 il sistema di routing
+ - Rimuovere i log
+
+ BUGS/GLITCHS/HATERS
+ - Immagine utente restituita diversa da quella giusta se non si fa il login sul browser
+ - Duplicazione non voluta dei progetti nell'elenco quando si modifica una issue
+ - Problema di sync quando si spammano azioni sulla pagina
+ - Problema legato alla basic auth per cui se spammo azioni sulla pagina mi mette in blacklist e non posso più accedere da rest senza fare il login col captcha

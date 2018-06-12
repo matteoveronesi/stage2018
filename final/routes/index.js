@@ -134,15 +134,13 @@ router.post("/projects", encoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	var login = {"user": req.body.user,"pass": req.body.pass};
-console.log(req.body);
+	
 	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects), JSON.parse(req.body.projectsName)).then(function (body){
 		console.log(" status: 200 (sent projects)");
 		res.send(tableToString);
 	}).catch(function (body) {
 		console.log(colors.red(body));
 	});
-
-	console.log(" status: 200 (sent)");
 });
 
 router.post("/edit/status", encoded, function(req, res){

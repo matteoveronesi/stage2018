@@ -39,6 +39,11 @@ h6 img{
 	left: 400px;
 }
 
+.show-menu:hover{
+	transform: rotate(45deg);
+	transition: 0.3s all;
+}
+
 .login-page{
 	position: fixed;
 	top: 0px;
@@ -62,6 +67,7 @@ h6 img{
 }
 
 .sidebar-focus{
+	z-index: 1;
 	display: none;
 	position: fixed;
 	height: 100%;
