@@ -3,7 +3,7 @@ const parser = require("body-parser");
 const request = require("request");
 const colors = require("colors");
 const router = express.Router();
-const encoded = parser.urlencoded({ extended: false });
+const URL = parser.urlencoded({ extended: false });
 
 var tableData; //JSON delle issue del progetto
 var tableToString; //html di body delle issue
@@ -77,17 +77,7 @@ function callJira(login, dest, type, data){
     });
 }
 
-router.all("/:name", function (req, res, next) {
-	// next();
-	if(req.headers.host == "localhost:9000") next();
-	else{
-		console.log("\n(" + getTime() + ")");
-	    console.log(" UNAUTHORIZED REQUEST.".red);
-		res.send("<h1>401 Unauthorized</h1><h3>Permessi insufficenti.</h3>");
-	}
-})
-
-router.post("/login", encoded, function(req, res){
+router.post("/login", URL, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(login)");
@@ -126,7 +116,7 @@ router.post("/login", encoded, function(req, res){
 	});
 });
 
-router.post("/projects", encoded, function(req, res){
+router.post("/projects", URL, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: GET(projects)");
@@ -134,16 +124,16 @@ router.post("/projects", encoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	var login = {"user": req.body.user,"pass": req.body.pass};
-	
+
 	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects), JSON.parse(req.body.projectsName)).then(function (body){
-		console.log(" status: 200 (sent projects)");
 		res.send(tableToString);
+		console.log(" status: 200 (sent projects)");
 	}).catch(function (body) {
 		console.log(colors.red(body));
 	});
 });
 
-router.post("/edit/status", encoded, function(req, res){
+router.post("/edit/status", URL, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(edit status)");
@@ -169,7 +159,7 @@ router.post("/edit/status", encoded, function(req, res){
 	});
 });
 
-router.put("/edit/summary", encoded, function(req, res){
+router.put("/edit/summary", URL, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: PUT(edit summary)");
@@ -195,7 +185,7 @@ router.put("/edit/summary", encoded, function(req, res){
 	});
 });
 
-router.post("/add", encoded, function(req, res){
+router.post("/add", URL, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: POST(add)");
@@ -229,7 +219,7 @@ router.post("/add", encoded, function(req, res){
 	});
 });
 
-router.delete("/delete", encoded, function(req, res){
+router.delete("/delete", URL, function(req, res){
 	console.log("\n(" + getTime() + ")");
     console.log(" REQUEST:".cyan);
 	console.log(" type: DELETE(delete)");

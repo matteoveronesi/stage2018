@@ -230,10 +230,9 @@ function hide(n){
 }
 
 function editFromKey(key,n){
-    if (key == 13){
+    if (key == 13)
         $("#"+n).find(".td-name").find("input").blur();
-        edit(n);
-    }
+
 }
 
 function edit(n){

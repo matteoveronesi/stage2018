@@ -66,3 +66,9 @@ Sprints
 11/06/2018 [DAY 16]
 
   - Spostare i dati di login nel localstorage [FATTO]
+
+12/06/2018 [DAY 17]
+
+  - Fixare bug duplicazione e immagine utente []
+  - Mettere online il progetto []
+  - Implementare la scelta dei progetti e la visualizzazione delle issue completate []
