@@ -25,7 +25,7 @@ function extractProjectsIssues(login, host, projects, projectsName){
 					var max = c + tableData.total +1;
 					if (i == 0){
 						var cp = c+1;
-						tableToString += '<tr onclick="toggleProject('+cp+','+max+','+c+')"><td colspan="3"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td></tr>';
+						tableToString += '<tr id="'+p+'" name="'+projectsName[j]+'" onclick="toggleProject('+cp+','+max+','+c+')"><td colspan="3"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td></tr>';
 						++c;
 					}
 					tableToString += '<tr id="'+c+'">';

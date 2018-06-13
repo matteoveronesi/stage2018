@@ -113,4 +113,7 @@
   
 12/06/2018 [DAY 17]
 
-  09:00 - 11:00 piccole modifiche, icona del menu cambiata, fixata la duplicazione dei progetti;
+  09:00 - 11:00 piccole modifiche, icona del menu cambiata, fixata la duplicazione dei progetti
+  11:00 - 13:00 aggiunta della scelta dei progetti da visualizzare
+  14:00 - 17:00 aggiunta del filtro delle issue visualizzate
+  17:00 - 18:00 caricamento del progetto sul server

@@ -69,6 +69,6 @@ Sprints
 
 12/06/2018 [DAY 17]
 
-  - Fixare bug duplicazione e immagine utente []
-  - Mettere online il progetto []
-  - Implementare la scelta dei progetti e la visualizzazione delle issue completate []
+  - Fixare bug duplicazione e immagine utente [FATTO]
+  - Mettere online il progetto [FATTO]
+  - Implementare la scelta dei progetti e il filtro delle issue completate [FATTO]

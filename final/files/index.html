@@ -31,8 +31,17 @@
 			<div class="sidebar w3-card-2">
 				<img class="user_avatar" src="guest.svg" width="50px" height="50px">
 				<a class="user_profile" target="_blank"><p class="user_name">Accesso non effettuato.</p></a>
-
 				<input class="w3-button w3-round w3-right bg-blue w3-hover-blue logout" type="submit" value="log out">
+				<div class="selectProjects">
+					<h6>Progetti da visualizzare</h6>
+				</div>
+				<br>
+				<div class="filterIssues">
+					<h6>Filtra Issue</h6>
+					<input type="radio" name="filter" onclick="filterIssues(0)" checked> Tutte<br>
+					<input type="radio" name="filter" onclick="filterIssues(1)" > Da fare<br>
+					<input type="radio" name="filter" onclick="filterIssues(2)" > Fatte<br>
+				</div>
 			</div>
 		</div>
     </header>

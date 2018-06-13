@@ -37,6 +37,8 @@ function refresh(sec,opt){
     var host = localStorage.getItem("host");
     var projects = localStorage.getItem("projects");
     var projectsName = localStorage.getItem("projectsName");
+    var table = $("#content-table");
+    var list = $(".selectProjects");
 
     if (opt == 1)
         $.ajax({
@@ -50,7 +52,16 @@ function refresh(sec,opt){
                 "projectsName": projectsName
             },
             success: function(res){
-                $("#content-table").html(res);
+                table.html(res);
+                
+                JSON.parse(projects).forEach(function(p,i){
+                    var tr = $("#"+p);
+                    
+                    var toggle = "$('#"+p+"').toggle();"
+
+                    if (table.html().search(p) != -1)
+                        list.html(list.html()+'<input type="checkbox" checked="checked" onclick="'+toggle+' '+tr.attr("onclick")+'"> '+JSON.parse(projectsName)[i]+'<br>');
+                });
             },
             error: function(err){
                 console.log(err);
@@ -68,7 +79,7 @@ function refresh(sec,opt){
                 "projectsName": projectsName
             },
             success: function(res){
-                $("#content-table").html(res);
+                table.html(res);
             },
             error: function(err){
                 console.log(err);
@@ -88,6 +99,7 @@ function getUserData(){
             var name = localStorage.getItem("name");
             var pass = localStorage.getItem("pass");
             var host = localStorage.getItem("host");
+
             $(".user_avatar").prop("src", host+"/secure/useravatar?ownerId="+user);
             $(".user_avatar").prop("class", "user_avatar w3-circle");
             $(".user_profile").prop("href", host+"/secure/ViewProfile.jspa");
@@ -187,6 +199,24 @@ function toggleProject(start,end,project){
         $("#"+project).css("transform","rotate(360deg)");
     for (var n = start; n < end; n++)
         $("#"+n).toggle();
+}
+
+function filterIssues(n){
+    if (n == 0){
+        $("tr").show();
+    }
+    else if (n == 1){
+        $("tr").show();
+        $("#content-table tr").filter(function() {
+            $(this).toggle($(this).html().indexOf(">check_box<") == -1)
+        });
+    }
+    else if (n == 2){
+        $("tr").show();
+        $("#content-table tr").filter(function() {
+            $(this).toggle($(this).html().indexOf(">check_box_outline_blank<") == -1)
+        });
+    }
 }
 
 function status(n){

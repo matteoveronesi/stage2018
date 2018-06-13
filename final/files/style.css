@@ -39,6 +39,10 @@ h6 img{
 	left: 400px;
 }
 
+div.selectProjects{
+	margin-top: 90px;
+}
+
 .show-menu:hover{
 	transform: rotate(45deg);
 	transition: 0.3s all;
@@ -72,7 +76,7 @@ h6 img{
 	position: fixed;
 	height: 100%;
 	width: 100%;
-	background: rgba(0,0,0,0.4);
+	background: rgba(0,0,0,0.3);
 }
 
 .sidebar{
