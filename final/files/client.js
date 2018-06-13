@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 function lock(){
     $("#lock").show();
-    setTimeout(()=>$("#lock").hide(),2800);
+    setTimeout(()=>$("#lock").hide(),2500);
 }
 
 function refresh(sec,opt){
@@ -171,6 +171,8 @@ function addIssue() {
     var host = localStorage.getItem("host");
 
     if(key.val().length > 0 && summary.val().length > 0){
+        lock();
+
         $.ajax({
             type: "POST",
             url: "/rest/add",

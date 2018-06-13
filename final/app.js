@@ -10,4 +10,4 @@ app.use(express.static('files'));
 
 app.use('/rest', routes);
 //app.use('/login', login);
-app.listen(9000, () => console.log('[app.js] listening on localhost:9000'.green));
+app.listen(9000, () => console.log('[app.js] listening on port 9000'.green));
