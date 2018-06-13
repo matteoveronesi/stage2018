@@ -30,6 +30,11 @@ $(document).ready(function(){
     });
 });
 
+function lock(){
+    $("#lock").show();
+    setTimeout(()=>$("#lock").hide(),2800);
+}
+
 function refresh(sec,opt){
     $("#logo").prop("src", "spin.svg");
     var user = localStorage.getItem("user");
@@ -85,7 +90,7 @@ function refresh(sec,opt){
                 console.log(err);
             }
         }), 1100);
-    setTimeout(()=>$("#logo").prop("src", "logo.png"), sec*1100);
+    setTimeout(()=>$("#logo").prop("src", "logo.png"), sec*1200);
 }
 
 function getUserData(){
@@ -248,6 +253,7 @@ function status(n){
          }
 	});
 }
+
 /*
 function show(n){
     $("#"+n).find(".edit").css("display","inline");
@@ -257,6 +263,7 @@ function hide(n){
     setTimeout(()=>$("#"+n).find(".edit").css("display","none"),150);
 }
 */
+
 function editFromKey(key,n){
     if (key == 13)
         $("#"+n).find(".td-name").find("input").blur();
@@ -272,6 +279,8 @@ function edit(n){
     var host = localStorage.getItem("host");
 
     if(summary.val().length > 0 && summary.val() != summary.prop("placeholder")){
+        lock();
+
       	$.ajax({
       	     type: "PUT",
              url: "/rest/edit/summary",
@@ -284,10 +293,9 @@ function edit(n){
                  console.log(err);
              }
       	});
-        $("#"+n).find(".edit").css("display","inline");
+        //$("#"+n).find(".edit").css("display","inline");
     }
-    else{
-    }
+    else{}
 }
 
 function del(n){

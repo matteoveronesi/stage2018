@@ -18,6 +18,17 @@ h6 img{
 	transform: rotate(90deg);
 }
 
+#lock{
+	cursor: wait;
+	display: none;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 5;
+}
+
 #iadd{
 	width: 100%;
 }

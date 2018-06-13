@@ -124,3 +124,4 @@
   09:15 - 09:30 fixato bug logout
   09:30 - 13:00 bugifix e refactor
   14:00 - 15:30 perfezionamento pre-release
+  15:30 - 16:30 fixati bug dello spam

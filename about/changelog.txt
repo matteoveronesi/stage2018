@@ -1,4 +1,4 @@
-### RELEASE 1.0 ###
+### RELEASE v1.0 ###
 
  #FUNZIONALITÀ IMPLEMENTATE
 
@@ -15,6 +15,13 @@
 
  #PROBLEMI CONOSCIUTI
 
-  - Se non si accede dal browser in uso, la miniatura dell'utente non è disponibile.
-  - I filtri e il raggruppamento dei progetti non funzionano contemporanemente.
-  - Se si cerca di effettuare troppe operazione di seguito, si intasa e in alcuni casi jira può bloccare l'account per le eccessive richieste, finché non viene effettuato un login tramite captcha.
+  - [B001] Se non si accede dal browser in uso, la miniatura dell'utente non è disponibile.
+  - [B006] I filtri e il raggruppamento dei progetti non funzionano contemporanemente.
+  - [B004] Se si cerca di effettuare troppe operazione di seguito, si intasa e in alcuni casi jira può bloccare l'account per le eccessive richieste, finché non viene effettuato un login tramite captcha.
+
+
+### RELEASE v1.0.1 ###
+
+ #BUGFIX
+
+  - [B004] Risolto bug quando si cerca di fare troppe azioni contemporaneamente. 

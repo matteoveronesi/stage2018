@@ -29,7 +29,7 @@ function extractProjectsIssues(login, host, projects, projectsName){
 						++c;
 					}
 					tableToString += '<tr id="'+c+'">';
-					tableToString += '<td title="Cambia Status" onclick="status('+c+')" class="td-status"><i class="material-icons">';
+					tableToString += '<td title="Cambia Status" onclick="lock(); status('+c+')" class="td-status"><i class="material-icons">';
 					if (tableData.issues[i].fields.status.name === "To Do")
 						tableToString += 'check_box_outline_blank';
 					else
@@ -37,7 +37,7 @@ function extractProjectsIssues(login, host, projects, projectsName){
 					tableToString += '</i></td>';
 					tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
 					tableToString += '<td title="Cambia Nome" class="td-name"><input onkeydown="editFromKey(event.which,'+c+')" onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
-					tableToString += '<td class="icons"><i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
+					tableToString += '<td class="icons"><i title="Elimina" onclick="lock(); del('+c+')" class="material-icons">delete</i></td>';
 					tableToString += '</tr>';
 					// <i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i>
 				}
