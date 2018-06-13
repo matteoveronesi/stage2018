@@ -66,10 +66,6 @@ div.selectProjects{
 	padding: 10px;
 }
 
-.logout{
-	display: none;
-}
-
 .sidebar-focus{
 	z-index: 1;
 	display: none;

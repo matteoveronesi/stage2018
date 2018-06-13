@@ -72,3 +72,8 @@ Sprints
   - Fixare bug duplicazione e immagine utente [FATTO]
   - Mettere online il progetto [FATTO]
   - Implementare la scelta dei progetti e il filtro delle issue completate [FATTO]
+
+13/06/2018 [DAY 18]
+
+  - Bugfix del logout e dei filtri []
+  - Rimuovere i log e commentare il codice bello []

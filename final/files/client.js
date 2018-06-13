@@ -90,9 +90,6 @@ function refresh(sec,opt){
 
 function getUserData(){
     if (typeof(Storage) !== "undefined") {
-        // Store
-        //localStorage.setItem("username", "Smoth");
-        // Retrieve
         //res = [ utente, nome completo, host]
         var user = localStorage.getItem("user");
         if (user){
@@ -105,7 +102,6 @@ function getUserData(){
             $(".user_profile").prop("href", host+"/secure/ViewProfile.jspa");
             $(".user_name").text(name);
             $(".login").toggle();
-            $(".logout").toggle();
             refresh(1,1);
         }
     }
@@ -159,7 +155,6 @@ function deleteUserData() {
     $("#content-table").html("");
     $(".login-page").toggle();
     $(".login").toggle();
-    $(".logout").toggle();
 }
 
 function addIssue() {

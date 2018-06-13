@@ -42,8 +42,8 @@ function extractProjectsIssues(login, host, projects, projectsName){
 					// <i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i>
 
 				}
-				if (++j == projects.length) resolve("ok");
 				console.log(" status: " + p + " fatto.");
+				if (++j == projects.length) resolve("ok");
 			}).catch(function (body) {
 				console.log(colors.red(body));
 				reject("error");
