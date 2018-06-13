@@ -53,10 +53,10 @@ function refresh(sec,opt){
             },
             success: function(res){
                 table.html(res);
-                
+                list.html("<h6>Progetti da visualizzare</h6>");
+
                 JSON.parse(projects).forEach(function(p,i){
                     var tr = $("#"+p);
-                    
                     var toggle = "$('#"+p+"').toggle();"
 
                     if (table.html().search(p) != -1)
@@ -188,12 +188,15 @@ function addIssue() {
 }
 
 function toggleProject(start,end,project){
-    if ($('#'+start).css("display") == "none")
+    if ($('#'+start).css("display") == "none"){
         $("#"+project).css("transform","rotate(90deg)");
-    else
+    }
+    else{
         $("#"+project).css("transform","rotate(360deg)");
+    }
     for (var n = start; n < end; n++)
         $("#"+n).toggle();
+        //if ($("#"+n).prop("class") != "filteredByIssue")
 }
 
 function filterIssues(n){
@@ -245,7 +248,7 @@ function status(n){
          }
 	});
 }
-
+/*
 function show(n){
     $("#"+n).find(".edit").css("display","inline");
 }
@@ -253,7 +256,7 @@ function show(n){
 function hide(n){
     setTimeout(()=>$("#"+n).find(".edit").css("display","none"),150);
 }
-
+*/
 function editFromKey(key,n){
     if (key == 13)
         $("#"+n).find(".td-name").find("input").blur();

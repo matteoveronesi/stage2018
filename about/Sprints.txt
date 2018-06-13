@@ -75,5 +75,6 @@ Sprints
 
 13/06/2018 [DAY 18]
 
-  - Bugfix del logout e dei filtri []
-  - Rimuovere i log e commentare il codice bello []
+  - Bugfix del logout e dei filtri [FATTO]
+  - Rimuovere i log [CANCELLED] 
+  - commentare il codicello []

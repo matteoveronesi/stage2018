@@ -1,0 +1,20 @@
+### RELEASE 1.0 ###
+
+ #FUNZIONALITÀ IMPLEMENTATE
+
+  - Login utente con scelta dell'host (es: stage.gnet.it).
+  - Visualizzazione delle issue divise e raggruppabili per progetti.
+  - Modifica del summary di una issue.
+  - Modifica dello status di una issue.
+  - Eliminazione di una issue.
+  - Aggiunta di una issue tramite key del progetto destinatario e summary della issue.
+  - Aggiornamento manuale dell'elenco delle issue tramite pulsante senza ricaricare la pagina.
+  - Possibilità di logout.
+  - Filtro dei progetti disponibili.
+  - Filtro delle issue in base allo status.
+
+ #PROBLEMI CONOSCIUTI
+
+  - Se non si accede dal browser in uso, la miniatura dell'utente non è disponibile.
+  - I filtri e il raggruppamento dei progetti non funzionano contemporanemente.
+  - Se si cerca di effettuare troppe operazione di seguito, si intasa e in alcuni casi jira può bloccare l'account per le eccessive richieste, finché non viene effettuato un login tramite captcha.

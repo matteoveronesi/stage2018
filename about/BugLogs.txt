@@ -1,8 +1,8 @@
 BUGS/GLITCHS/MISS
 
-  IGNORED (13/06) - Immagine utente restituita diversa da quella giusta se non si fa il login sul browser
-  FIXED (13/06) - Duplicazione non voluta dei progetti nell'elenco quando si modifica una issue
-  FIXED (14/06) - Pulsante logout che scompare a caso
+  IGNORED (12/06) - Immagine utente restituita diversa da quella giusta se non si è loggati sul browser in uso
+  FIXED (12/06) - Duplicazione non voluta dei progetti nell'elenco quando si modifica una issue
+  FIXED (13/06) - Pulsante logout che scompare a caso
   - Problema di sync quando si spammano azioni sulla pagina
   - Problema legato alla basic auth per cui se spammo azioni sulla pagina mi mette in blacklist e non posso più accedere da rest senza fare il login col captcha
-  - Funzionamento simultaneo della visualizzazione dei progetti insieme al filtro delle issue non possibile
+  IGNORED (13/06) - Funzionamento simultaneo della visualizzazione dei progetti insieme al filtro delle issue attualmente non possibile
