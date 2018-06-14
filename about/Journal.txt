@@ -134,3 +134,5 @@
   12:00 - 13:00 controlli e messa online v1.0.2
   14:00 - 15:00 presentazione progetti
   15:00 - 16:00 review finale
+  16:00 - 17:00 parlottazzi con sossy e ila
+  17:00 - 18:00 Spostamento pulsante di refresh

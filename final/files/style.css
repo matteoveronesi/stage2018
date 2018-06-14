@@ -56,6 +56,15 @@ div.selectProjects{
 	cursor: pointer;
 }
 
+.refresh img{
+	margin-right: 10px;
+}
+
+.refresh img:hover{
+	transform: rotate(180deg);
+	transition: 0.4s all;
+}
+
 .show-menu:hover{
 	transform: rotate(45deg);
 	transition: 0.3s all;
@@ -95,12 +104,6 @@ div.selectProjects{
 	width: 300px;
 	background: #fff;
 	padding: 50px;
-}
-
-.refresh{
-	position: fixed;
-	left: 15px;
-	bottom: 15px;
 }
 
 .edit{

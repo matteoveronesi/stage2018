@@ -32,3 +32,10 @@
  #FUNZIONALITÀ AGGIUNTE
  
   - Spostata la modifica di fianco al nome del progetto
+
+
+### RELEASE v1.1.0 ###
+
+ #FUNZIONALITÀ AGGIUNTE
+ 
+  - Spostato il pulsante di refresh in alto

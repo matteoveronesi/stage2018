@@ -9,6 +9,7 @@ $(document).ready(function(){
     });
 
     $("#load").click(function(){
+        lock(1200);
         refresh(1,1);
     });
 
@@ -25,9 +26,12 @@ $(document).ready(function(){
     });
 });
 
-function lock(){
+function lock(n){
     $("#lock").show();
-    setTimeout(()=>$("#lock").hide(),2500);
+    var t;
+    if (n) t = n;
+    else t = 2500; 
+    setTimeout(()=>$("#lock").hide(),t);
 }
 
 function openAdd(i){
