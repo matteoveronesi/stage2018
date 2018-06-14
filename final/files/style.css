@@ -8,6 +8,7 @@
 }
 
 table{
+	width: 100%;
 	padding-left: 10px;
 	margin-top: 45px;
 	margin-bottom: 70px;
@@ -34,14 +35,11 @@ h6 img{
 }
 
 #new-key{
-	width: 100px;
+	display: none;
 }
 
 #new-name{
-	position: absolute;
-	top: 8px;
-	left: 125px;
-	width: 260px;
+	width: 370px;
 }
 
 #new-add{
@@ -52,6 +50,10 @@ h6 img{
 
 div.selectProjects{
 	margin-top: 90px;
+}
+
+.add-button:hover{
+	cursor: pointer;
 }
 
 .show-menu:hover{

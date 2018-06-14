@@ -82,7 +82,7 @@
   09:00 - 12:00 sistemazione grafica della pagina (padding, parti inutili, modifica a comparsa)
   12:00 - 13:00 implementazione del menu a comparsa
   14:00 - 16:00 morte cerebrale
-  16:00 - 18:00 continuo implementazione menu
+  16:00 - 17:00 continuo implementazione menu
 
 06/06/2018 [DAY 13] 
 
@@ -125,3 +125,10 @@
   09:30 - 13:00 bugifix e refactor
   14:00 - 15:30 perfezionamento pre-release
   15:30 - 16:30 fixati bug dello spam
+  16:30 - 18:00 aggiustamenti release + review
+
+14/06/2018 [DAY 19]
+
+  09:00 - 11:00 preparazione documenti, release e presentazione
+  11:00 - 12:00 spostamento pulsante di aggiunta
+  12:00 - 13:00 controlli e messa online v1.0.2

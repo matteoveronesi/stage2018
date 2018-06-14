@@ -9,10 +9,6 @@ var tableData; //JSON delle issue del progetto
 var tableToString; //html di body delle issue
 var rest = "/rest/api/latest"; //api rest di jira
 
-function getTime(){
-	return new Date().toLocaleTimeString();
-}
-
 function extractProjectsIssues(login, host, projects, projectsName){
 	tableToString = "";
 	var c = 0;
@@ -25,7 +21,7 @@ function extractProjectsIssues(login, host, projects, projectsName){
 					var max = c + tableData.total +1;
 					if (i == 0){
 						var cp = c+1;
-						tableToString += '<tr id="'+p+'" name="'+projectsName[j]+'" onclick="toggleProject('+cp+','+max+','+c+')"><td colspan="3"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td></tr>';
+						tableToString += '<tr id="'+p+'" name="'+projectsName[j]+'"><td colspan="3" onclick="toggleProject('+cp+','+max+','+c+')"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td><td onclick="openAdd('+j+')"><img class="add-button" title="Nuova Issue" src="add.svg" width="16px"></td></tr>';
 						++c;
 					}
 					tableToString += '<tr id="'+c+'">';
@@ -77,8 +73,7 @@ function callJira(login, dest, type, data){
 }
 
 router.post("/login", UrlEncoded, function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
+    console.log("\n REQUEST:".cyan);
 	console.log(" type: POST(login)");
     console.log(" url: " + req.headers.host + req.originalUrl);
     console.log(" host: " + req.body.host);
@@ -116,8 +111,7 @@ router.post("/login", UrlEncoded, function(req, res){
 });
 
 router.post("/projects", UrlEncoded, function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
+    console.log("\n REQUEST:".cyan);
 	console.log(" type: GET(projects)");
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" RESPONSE:".cyan);
@@ -133,8 +127,7 @@ router.post("/projects", UrlEncoded, function(req, res){
 });
 
 router.post("/edit/status", UrlEncoded, function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
+    console.log("\n REQUEST:".cyan);
 	console.log(" type: POST(edit status)");
     console.log(" url: " + req.headers.host + req.originalUrl);
     console.log(" key: " + req.body.key);
@@ -159,8 +152,7 @@ router.post("/edit/status", UrlEncoded, function(req, res){
 });
 
 router.put("/edit/summary", UrlEncoded, function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
+    console.log("\n REQUEST:".cyan);
 	console.log(" type: PUT(edit summary)");
 	console.log(" url: " + req.headers.host + req.originalUrl);
     console.log(" key: " + req.body.key);
@@ -185,8 +177,7 @@ router.put("/edit/summary", UrlEncoded, function(req, res){
 });
 
 router.post("/add", UrlEncoded, function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
+    console.log("\n REQUEST:".cyan);
 	console.log(" type: POST(add)");
     console.log(" url: " + req.headers.host + req.originalUrl);
     console.log(" key: " + req.body.key);
@@ -219,8 +210,7 @@ router.post("/add", UrlEncoded, function(req, res){
 });
 
 router.delete("/delete", UrlEncoded, function(req, res){
-	console.log("\n(" + getTime() + ")");
-    console.log(" REQUEST:".cyan);
+    console.log("\n REQUEST:".cyan);
 	console.log(" type: DELETE(delete)");
     console.log(" url: " + req.headers.host + req.originalUrl);
 	console.log(" key: " + req.body.key);

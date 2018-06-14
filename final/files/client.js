@@ -4,11 +4,6 @@ $(document).ready(function(){
 
     getUserData();
 
-    $(".show-add").click(function(){
-        $("#iadd").toggle(100);
-        $("#iadd").find("#new-name").focus();
-    });
-
     $(".show-menu").click(function(){
         $(".sidebar-focus").toggle();
     });
@@ -33,6 +28,14 @@ $(document).ready(function(){
 function lock(){
     $("#lock").show();
     setTimeout(()=>$("#lock").hide(),2500);
+}
+
+function openAdd(i){
+    var projects = localStorage.getItem("projects");
+    var project = JSON.parse(projects)[i];
+    $("#new-key").prop("value",project);
+    $("#iadd").toggle(100);
+    $("#iadd").find("#new-name").focus();
 }
 
 function refresh(sec,opt){

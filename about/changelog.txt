@@ -1,6 +1,6 @@
 ### RELEASE v1.0 ###
 
- #FUNZIONALITÀ IMPLEMENTATE
+ #FUNZIONALITÀ AGGIUNTE
 
   - Login utente con scelta dell'host (es: stage.gnet.it).
   - Visualizzazione delle issue divise e raggruppabili per progetti.
@@ -25,3 +25,10 @@
  #BUGFIX
 
   - [B004] Risolto bug quando si cerca di fare troppe azioni contemporaneamente. 
+
+
+### RELEASE v1.0.2 ###
+
+ #FUNZIONALITÀ AGGIUNTE
+ 
+  - Spostata la modifica di fianco al nome del progetto
