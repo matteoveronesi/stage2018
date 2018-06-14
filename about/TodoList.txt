@@ -13,4 +13,5 @@ Altre belle cose da fare ( 14/06 )
   - Implementare la possibilità di scegliere i progetti da includere nel login
   - Spostare il pulsante di refresh in alto
   - Spostare i filtri in alto
+  - Aggiungere un pulsante di uscita dai vari popup
   - aggiungere dei feedback agli errori (opt)

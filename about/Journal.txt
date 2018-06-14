@@ -132,3 +132,5 @@
   09:00 - 11:00 preparazione documenti, release e presentazione
   11:00 - 12:00 spostamento pulsante di aggiunta
   12:00 - 13:00 controlli e messa online v1.0.2
+  14:00 - 15:00 presentazione progetti
+  15:00 - 16:00 review finale
