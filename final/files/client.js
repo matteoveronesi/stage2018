@@ -8,6 +8,10 @@ $(document).ready(function(){
         $(".new-issue-focus").hide(10);
     });
 
+    $(".save-status").click(function(){
+        saveStatusAlias();
+    });
+
     $(".exit-sidebar").click(function(){
         $(".sidebar-focus").hide(10);
     });
@@ -46,6 +50,17 @@ function lock(n){
     setTimeout(()=>$("#lock").hide(),sec);
 }
 
+function saveStatusAlias(){
+    var todo = $("#alias-todo").val();
+    var done = $("#alias-done").val();
+
+    localStorage.setItem("todo", todo);
+    localStorage.setItem("done", done);
+
+    showToast(1,"Status salvati");
+    refresh(1,1);
+}
+
 function showToast(n,mex) {
     if (n == 0) var toast = $("#errormex");
     else if (n == 1) var toast = $("#successmex");
@@ -70,8 +85,16 @@ function refresh(sec,opt){
     var user = localStorage.getItem("user");
     var pass = localStorage.getItem("pass");
     var host = localStorage.getItem("host");
+    var done = localStorage.getItem("done");
     var projects = localStorage.getItem("projects");
     var table = $("#content-table");
+    
+    if (done) var statusDone = done;
+    else var statusDone = "";
+
+    //var list = $(".status-settings");
+    //var projectStatusTodo = [];
+    //var projectStatusDone = [];
 
     if (opt == 1)
         $.ajax({
@@ -81,10 +104,16 @@ function refresh(sec,opt){
                 "user": user,
                 "pass": pass,
                 "host": host,
-                "projects": projects
+                "projects": projects,
+                "statusDone": statusDone
             },
             success: function(res){
                 table.html(res);
+                /*
+                list.html("<h6>Impostazioni Status</h6>");
+                JSON.parse(projects).forEach(function(p,i){
+                    list.html(list.html()+'<p class="legend">Project: '+p+'</p><input type="text" placeholder="Status alias Todo"><br><input type="text" placeholder="Status alias Done"><br>');
+                });*/
             },
             error: function(err){
                 console.log(err);
@@ -99,7 +128,8 @@ function refresh(sec,opt){
                 "user": user,
                 "pass": pass,
                 "host": host,
-                "projects": projects
+                "projects": projects,
+                "statusDone": statusDone
             },
             success: function(res){
                 table.html(res);
@@ -119,15 +149,21 @@ function getUserData(){
         if (user){
             var name = localStorage.getItem("name");
             var host = localStorage.getItem("host");
+            var todo = localStorage.getItem("todo");
+            var done = localStorage.getItem("done");
 
             $(".user_avatar").prop("src", host+"/secure/useravatar?ownerId="+user);
             $(".user_avatar").prop("class", "user_avatar w3-circle");
             $(".user_profile").prop("href", host+"/secure/ViewProfile.jspa");
             $(".user_name").text(name);
+            $("#alias-todo").val(todo);
+            $("#alias-done").val(done);
             $(".login").toggle();
             refresh(1,1);
         }
     }
+    else 
+        showToast(0,"Spiacenti, il browser non è supportato");
 }
 
 function setUserData(){
@@ -207,9 +243,10 @@ function addIssue() {
 
         //key.prop("value", "");
         summary.prop("value", "");
-        summary.focus();
     }
     //else showToast(0,"Titolo obbligatorio.");
+    
+    summary.focus();
 }
 
 function toggleProject(start,end,project){
@@ -245,34 +282,46 @@ function status(n){
     var obj = $("#"+n);
     var key = obj.find(".td-key").find("a");
     var status = obj.find(".td-status").find("i");
-    var status_value = "";
+    var status_name = "";
     var user = localStorage.getItem("user");
     var pass = localStorage.getItem("pass");
     var host = localStorage.getItem("host");
+    var todo = localStorage.getItem("todo");
+    var done = localStorage.getItem("done");
 
-    if (status.text() === "check_box"){
-        status_value = "51"; //todo
-        status.text("check_box_outline_blank");
+    if(todo && done)
+    {
+        lock(); 
+        if (status.text() === "check_box"){
+            status_name = todo;
+            status.text("check_box_outline_blank");
+        }
+        else{
+            status_name = done;
+            status.text("check_box");
+        }
+    
+        $.ajax({
+            type: "POST",
+             url: "/rest/edit/status",
+             data: {"user": user, "pass": pass, "host": host, "key": key.text(), "name": status_name},
+             success: function(res){
+                 console.log(res);
+                 refresh(2);
+                 showToast(1,key.text()+" aggiornata");
+             },
+             error: function(err){
+                 console.log(err);
+                 showToast(0,"Errore");
+             }
+        });
     }
     else{
-        status_value = "21"; //done
-        status.text("check_box");
+        showToast(0,"Status non trovati");
+        setTimeout(()=>showToast(1,"Clicca la rotella per impostarli"),2000);
     }
+        
 
-    $.ajax({
-        type: "POST",
-         url: "/rest/edit/status",
-         data: {"user": user, "pass": pass, "host": host, "key": key.text(), "status": status_value},
-         success: function(res){
-             console.log(res);
-             refresh(2);
-             showToast(1,key.text()+" aggiornata");
-         },
-         error: function(err){
-             console.log(err);
-             showToast(0,"Errore");
-         }
-	});
 }
 
 /*
@@ -322,6 +371,7 @@ function edit(n){
 }
 
 function del(n){
+    lock(); 
     var key = $("#"+n).find(".td-key").find("a").text();
     var user = localStorage.getItem("user");
     var pass = localStorage.getItem("pass");

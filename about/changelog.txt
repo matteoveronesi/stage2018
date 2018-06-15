@@ -45,6 +45,7 @@
   - Aggiunti pulsanti di uscita dai popup
   - Spostata la scelta dei progetti nel login
   - Aggiunti popup di feedback sulle chiamate rest
+  - Aggiunta la possibilità di scegliere quali status usare come alias di todo e done
 
  #BUGFIX
 

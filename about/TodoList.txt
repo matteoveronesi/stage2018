@@ -3,7 +3,7 @@ Cose rimaste da fare e/o interessanti da fare ( 11/06 )
   FATTO - Spostare i dati sul localstorage 
   FATTO - Introdurre la scelta dei progetti da visualizzare
   FATTO - Nascondere le issue completate
-  - Implementare il funzionamento con tipi di status diversi da todo e done
+  FATTO - Implementare il funzionamento con tipi di status diversi da todo e done
   - Rimuovere i log
   - Rifare da 0 il sistema di routing (opt)
 

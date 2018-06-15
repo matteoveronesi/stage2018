@@ -9,7 +9,7 @@ var tableData; //JSON delle issue del progetto
 var tableToString; //html di body delle issue
 var rest = "/rest/api/latest"; //api rest di jira
 
-function extractProjectsIssues(login, host, projects){
+function extractProjectsIssues(login, host, projects, done){
 	tableToString = "";
 	var c = 0;
 	return new Promise( function (resolve, reject) {
@@ -25,15 +25,15 @@ function extractProjectsIssues(login, host, projects){
 						++c;
 					}
 					tableToString += '<tr id="'+c+'">';
-					tableToString += '<td title="Cambia Status" onclick="lock(); status('+c+')" class="td-status"><i class="material-icons">';
-					if (tableData.issues[i].fields.status.name === "To Do")
-						tableToString += 'check_box_outline_blank';
-					else
+					tableToString += '<td title="Cambia Status" onclick="status('+c+')" class="td-status"><i class="material-icons">';
+					if (tableData.issues[i].fields.status.name === done)
 						tableToString += 'check_box';
+					else
+						tableToString += 'check_box_outline_blank';
 					tableToString += '</i></td>';
 					tableToString += '<td title="Vedi Issue" class="td-key w3-white w3-small"><p><a href="'+host+'/browse/'+tableData.issues[i].key+'" target="_blank">'+tableData.issues[i].key+'</a></p></td>';
 					tableToString += '<td title="Cambia Nome" class="td-name"><input onkeydown="editFromKey(event.which,'+c+')" onblur="edit('+c+')" class="w3-input input" type="text" placeholder="'+tableData.issues[i].fields.summary+'" value="'+tableData.issues[i].fields.summary+'"></td>';
-					tableToString += '<td class="icons"><i title="Elimina" onclick="lock(); del('+c+')" class="material-icons">delete</i></td>';
+					tableToString += '<td class="icons"><i title="Elimina" onclick="del('+c+')" class="material-icons">delete</i></td>';
 					tableToString += '</tr>';
 					// <i title="Conferma" onclick="edit('+c+')" class="material-icons edit">mode_edit</i>
 				}
@@ -103,7 +103,7 @@ router.post("/projects", UrlEncoded, function(req, res){
 
 	var login = {"user": req.body.user,"pass": req.body.pass};
 
-	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects)).then(function (body){
+	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects), req.body.statusDone).then(function (body){
 		res.send(tableToString);
 		console.log(" status: 200 (sent projects)");
 	}).catch(function (body) {
@@ -123,7 +123,7 @@ router.post("/edit/status", UrlEncoded, function(req, res){
     var dest = req.body.host + rest + "/issue/" + req.body.key + "/transitions";
     var data = {
         "transition": {
-                    "id": req.body.status
+                    "name": req.body.name
         }
     };
 

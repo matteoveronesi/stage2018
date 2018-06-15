@@ -89,5 +89,5 @@ Sprints
   - Bugfix conflitto filtri [BL]
   - Spostare la scelta dei progetti nel login , i filtri e il popup di aggiunta [FATTO]
   - Aggiungere pulsanti di uscita ai popup [FATTO]
-  - Implementare la scelta degli status da usare nei vari progetti []
+  - Implementare la scelta degli status da usare nei vari progetti [FATTO]
   - Aggiungere i feedback agli errori / azioni [FATTO]

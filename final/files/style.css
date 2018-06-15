@@ -45,6 +45,19 @@ h6 img{
 	display: none;
 }
 
+.warning{
+	margin-top: 60px;
+	color: rgb(187, 0, 37);
+}
+
+.save-status{
+	margin-top: 10px;
+}
+
+.status-settings{
+	margin-top: 110px;
+}
+
 .legend{
 	margin-bottom: 1px;
 }
@@ -54,13 +67,13 @@ h6 img{
 	position: fixed;
 	top: 40px;
 	right: 15px;
-	color: red;
+	color: crimson;
 }
 
 .exit-new-issue{
 	cursor: pointer;
 	margin-top: 5px;
-	color: red;
+	color: crimson;
 }
 
 .new-issue-focus{
