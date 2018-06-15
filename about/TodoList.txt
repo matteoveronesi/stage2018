@@ -12,7 +12,7 @@ Altre belle cose da fare ( 14/06 )
   FATTO - Spostare il pulsante di aggiunta di fianco al nome del progetto
   FATTO - Implementare la possibilità di scegliere i progetti nel login
   FATTO - Spostare il pulsante di refresh in alto
-  - Spostare i filtri in alto
+  FATTO - Spostare i filtri in alto
   FATTO - Aggiungere un pulsante di uscita dai vari popup
   FATTO - Spostare il popup di aggiunta
   FATTO - aggiungere dei feedback agli errori / chiamate andate a buon fine

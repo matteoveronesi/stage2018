@@ -6,4 +6,4 @@ BUGS/GLITCHS/MISS
   [B004] FIXED (13/06) - Problema di sync quando si spammano azioni sulla pagina
   [B005] FIXED (13/06) - Problema legato alla basic auth per cui se spammo azioni sulla pagina mi mette in blacklist e non posso più accedere da rest senza fare il login col captcha
   [B006] - Funzionamento simultaneo della visualizzazione dei progetti insieme al filtro delle issue attualmente non possibile
-  [B007] - Blocco del software se l'utente ha troppi progetti.
+  [B007] FIXED (15/06) - Blocco del software se l'utente ha troppi progetti.

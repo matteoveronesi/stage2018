@@ -88,10 +88,10 @@ h6 img{
 	cursor: pointer;
 }
 
-.refresh img{
+.filter img, .refresh img{
 	margin-right: 10px;
 }
-
+/*
 .refresh img:hover{
     -webkit-transform: rotate(180deg);
 	transform: rotate(180deg);
@@ -102,6 +102,16 @@ h6 img{
     -webkit-transform: rotate(180deg);
 	transform: rotate(45deg);
 	transition: 0.3s all;
+}
+*/
+
+.filterIssues{
+	display: none;
+	background: #fff;
+	position: fixed;
+	top: 42px;
+	right: 80px;
+	padding: 10px;
 }
 
 .login-page{

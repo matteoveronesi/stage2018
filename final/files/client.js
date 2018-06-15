@@ -32,6 +32,10 @@ $(document).ready(function(){
     $("#new-add").click(function(){
         addIssue();
     });
+
+    $(".filter").click(function(){
+        $(".filterIssues").toggle();
+    });
 });
 
 function lock(n){
@@ -156,7 +160,7 @@ function setUserData(){
             }
         });
     }
-    else //showToast(0,"Compila tutti i campi.");
+    //else showToast(0,"Compila tutti i campi.");
 }
 
 function deleteUserData() {
@@ -205,7 +209,7 @@ function addIssue() {
         summary.prop("value", "");
         summary.focus();
     }
-    else //showToast(0,"Titolo obbligatorio.");
+    //else showToast(0,"Titolo obbligatorio.");
 }
 
 function toggleProject(start,end,project){

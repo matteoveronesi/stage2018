@@ -15,12 +15,15 @@
 		<div class="bg-blue w3-padding w3-card-2">
 			<img id="logo" src="spin.svg" width="26px">
 	    	<a class="title">JIRA Issues Panel</a>
-			<div class=" w3-right  show-menu i">
+			<div class="w3-right show-menu i">
 				<img src="options.svg" width="25px" title="Impostazioni" class="i">
 			</div>
-			<div id="load" class="w3-bar-item w3-right refresh">
+			<div id="load" class="w3-right refresh">
 					<img src="refresh.svg" width="25px" title="Ricarica" class="i">
 		  	</div>
+			<div id="load" class="w3-right filter">
+				<img src="filter.svg" width="25px" title="Filtra" class="i">
+			</div>
 		</div>
 		
 		<div class="sidebar-focus">
@@ -30,14 +33,14 @@
 				<a class="user_profile" target="_blank"><p class="user_name">Accesso non effettuato.</p></a>
 				<input class="w3-button w3-round w3-right bg-blue w3-hover-blue logout" type="submit" value="log out">
 				<br>
-				<div class="filterIssues">
-					<h6>Filtra Issue</h6>
-					<input type="radio" name="filter" onclick="filterIssues(0)" checked> Tutte<br>
-					<input type="radio" name="filter" onclick="filterIssues(1)" > Da fare<br>
-					<input type="radio" name="filter" onclick="filterIssues(2)" > Fatte<br>
-				</div>
 			</div>
 			<small class="version">JIRA Issues Panel 1.1.0 | &copy; 2018 | Matteo Veronesi</small>
+		</div>
+
+		<div class="filterIssues w3-card-2">
+			<input type="radio" name="filter" onclick="filterIssues(0); $('.filterIssues').hide();" checked> Tutte<br>
+			<input type="radio" name="filter" onclick="filterIssues(1); $('.filterIssues').hide();" > Da fare<br>
+			<input type="radio" name="filter" onclick="filterIssues(2); $('.filterIssues').hide();" > Fatte<br>
 		</div>
     </header>
 	<section class="new-issue-focus">
