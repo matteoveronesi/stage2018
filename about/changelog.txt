@@ -39,3 +39,8 @@
  #FUNZIONALITÀ AGGIUNTE
  
   - Spostato il pulsante di refresh in alto
+  - Spostato il popup di aggiunta in alto
+  - Aggiunta la possibilità di inserire più issue di fila
+  - Aggiunti pulsanti di uscita dai popup
+  - Spostata la scelta dei progetti nel login
+  - Aggiunti popup di feedback sulle chiamate rest

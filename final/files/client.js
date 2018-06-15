@@ -42,6 +42,15 @@ function lock(n){
     setTimeout(()=>$("#lock").hide(),sec);
 }
 
+function showToast(n,mex) {
+    if (n == 0) var toast = $("#errormex");
+    else if (n == 1) var toast = $("#successmex");
+
+    toast.text(mex);
+    toast.fadeIn(400);
+    setTimeout(()=>toast.fadeOut(1000), 3000);
+}
+
 function openAdd(i){
     var projects = localStorage.getItem("projects");
     var project = JSON.parse(projects)[i];
@@ -87,6 +96,7 @@ function refresh(sec,opt){
             },
             error: function(err){
                 console.log(err);
+                showToast(0,"Errore");
             }
         });
     else if (opt == 2)
@@ -105,6 +115,7 @@ function refresh(sec,opt){
             },
             error: function(err){
                 console.log(err);
+                showToast(0,"Errore");
             }
         }), 1100);
     setTimeout(()=>$("#logo").prop("src", "logo.png"), sec*1200);
@@ -155,11 +166,11 @@ function setUserData(){
             },
             error: function(err){
                 console.log(err);
-                alert("Qualcosa non ha funzionato.");
+                showToast(0,"Errore");
             }
         });
     }
-    else alert("Compila tutti i campi.");
+    else showToast(0,"Compila tutti i campi.");
 }
 
 function deleteUserData() {
@@ -200,15 +211,15 @@ function addIssue() {
             },
             error: function(err){
                 console.log(err);
+                showToast(0,"Errore");
             }
         });
 
-        $(".new-issue-focus").hide(10);
         //key.prop("value", "");
         summary.prop("value", "");
+        summary.focus();
     }
-    else{
-    }
+    else{}
 }
 
 function toggleProject(start,end,project){
@@ -220,7 +231,6 @@ function toggleProject(start,end,project){
     }
     for (var n = start; n < end; n++)
         $("#"+n).toggle();
-        //if ($("#"+n).prop("class") != "filteredByIssue")
 }
 
 function filterIssues(n){
@@ -266,9 +276,11 @@ function status(n){
          success: function(res){
              console.log(res);
              refresh(2);
+             showToast(1,key+" aggiornata");
          },
          error: function(err){
              console.log(err);
+             showToast(0,"Errore");
          }
 	});
 }
@@ -307,9 +319,11 @@ function edit(n){
              success: function(res){
                  console.log(res);
                  refresh(2,2);
+                 showToast(1,key+" aggiornata");
              },
              error: function(err){
                  console.log(err);
+                 showToast(0,"Errore");
              }
       	});
         //$("#"+n).find(".edit").css("display","inline");
@@ -330,9 +344,11 @@ function del(n){
          success: function(res){
              console.log(res);
              refresh(2,2);
+             showToast(1,key+" Eliminata");
          },
          error: function(err){
              console.log(err);
+             showToast(0,"Errore");
          }
     });
 }

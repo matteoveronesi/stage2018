@@ -93,11 +93,13 @@ h6 img{
 }
 
 .refresh img:hover{
+    -webkit-transform: rotate(180deg);
 	transform: rotate(180deg);
 	transition: 0.4s all;
 }
 
 .show-menu:hover{
+    -webkit-transform: rotate(180deg);
 	transform: rotate(45deg);
 	transition: 0.3s all;
 }
@@ -196,4 +198,36 @@ i:hover, .i:hover{
 
 .td-status{
     width: 35px;
+}
+
+#errormex {
+    display: none;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: rgb(177, 34, 34);
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 14px;
+    position: fixed;
+    z-index: 7;
+    left: 50%;
+    top: 30px;
+    font-size: 16px;
+}
+
+#successmex {
+    display: none;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #205081;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 14px;
+    position: fixed;
+    z-index: 7;
+    left: 50%;
+    bottom: 30px;
+    font-size: 16px;
 }

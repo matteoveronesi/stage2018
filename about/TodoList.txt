@@ -13,6 +13,7 @@ Altre belle cose da fare ( 14/06 )
   - Implementare la possibilità di scegliere i progetti da includere nel login
   FATTO - Spostare il pulsante di refresh in alto
   - Spostare i filtri in alto
-  - Aggiungere un pulsante di uscita dai vari popup
-  - Spostare il popup di aggiunta
-  - aggiungere dei feedback agli errori (opt)
+  FATTO - Aggiungere un pulsante di uscita dai vari popup
+  FATTO - Spostare il popup di aggiunta
+  - Cambiare l'icona del cestino
+  FATTO - aggiungere dei feedback agli errori / chiamate andate a buon fine
