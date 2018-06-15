@@ -9,7 +9,7 @@ var tableData; //JSON delle issue del progetto
 var tableToString; //html di body delle issue
 var rest = "/rest/api/latest"; //api rest di jira
 
-function extractProjectsIssues(login, host, projects, projectsName){
+function extractProjectsIssues(login, host, projects){
 	tableToString = "";
 	var c = 0;
 	return new Promise( function (resolve, reject) {
@@ -21,7 +21,7 @@ function extractProjectsIssues(login, host, projects, projectsName){
 					var max = c + tableData.total +1;
 					if (i == 0){
 						var cp = c+1;
-						tableToString += '<tr id="'+p+'" name="'+projectsName[j]+'"><td colspan="3" onclick="toggleProject('+cp+','+max+','+c+')"><h6><img src="arrow.svg" id="'+c+'" height="10px"> '+projectsName[j]+' ('+p+')</h6></td><td onclick="openAdd('+j+')"><img class="add-button" title="Nuova Issue" src="add.svg" width="16px"></td></tr>';
+						tableToString += '<tr id="'+p+'"><td colspan="3" onclick="toggleProject('+cp+','+max+','+c+')"><h6><img src="arrow.svg" id="'+c+'" height="10px"> Project: '+p+'</h6></td><td onclick="openAdd('+j+')"><img class="add-button" title="Nuova Issue" src="add.svg" width="16px"></td></tr>';
 						++c;
 					}
 					tableToString += '<tr id="'+c+'">';
@@ -82,28 +82,13 @@ router.post("/login", UrlEncoded, function(req, res){
 	console.log(" RESPONSE:".cyan);
 
 	var login = {"user": req.body.user,"pass": req.body.pass};
-    var dest = req.body.host + rest + "/project";
-	var projects = [];
-	var projectsName = [];
+	var dest = req.body.host + "/rest/api/latest/user?username=" + login.user;
+
 	callJira(login, dest, "GET").then(function (body){
 		if (body == "denied")
 			res.sendStatus(400);
-		else{
-			JSON.parse(body).forEach(function(p,i){
-				projects.push(p.key);
-				projectsName.push(p.name);
-
-				if (++i == JSON.parse(body).length){
-					var dest = req.body.host + "/rest/api/latest/user?username=" + login.user;
-
-					callJira(login, dest, "GET").then(function (body){
-						res.send({"projects": projects, "projectsName": projectsName, "name": JSON.parse(body).displayName});
-					}).catch(function (body) {
-						console.log(colors.red(body));
-					});
-				}
-			});
-		}
+		else
+			res.send(JSON.parse(body).displayName);
 		console.log(" status: 200 (sent)");
 	}).catch(function (body) {
 		console.log(colors.red(body));
@@ -118,7 +103,7 @@ router.post("/projects", UrlEncoded, function(req, res){
 
 	var login = {"user": req.body.user,"pass": req.body.pass};
 
-	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects), JSON.parse(req.body.projectsName)).then(function (body){
+	extractProjectsIssues(login, req.body.host, JSON.parse(req.body.projects)).then(function (body){
 		res.send(tableToString);
 		console.log(" status: 200 (sent projects)");
 	}).catch(function (body) {

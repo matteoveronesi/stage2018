@@ -29,7 +29,6 @@
 				<img class="user_avatar" src="guest.svg" width="50px" height="50px">
 				<a class="user_profile" target="_blank"><p class="user_name">Accesso non effettuato.</p></a>
 				<input class="w3-button w3-round w3-right bg-blue w3-hover-blue logout" type="submit" value="log out">
-				<div class="selectProjects"></div>
 				<br>
 				<div class="filterIssues">
 					<h6>Filtra Issue</h6>
@@ -56,10 +55,13 @@
 		<div class="login w3-card-4">
 			<img id="logo" src="icon.png" width="26px">
 	    	<a class="title">JIRA Issues Panel</a>
-			<br><br>
-			<input id="login_user" class="w3-input" type="text" placeholder="Utente">
+			<br>
+			<p class="legend">Dati utente</p>
+			<input id="login_user" class="w3-input" type="text" placeholder="Username">
 			<input id="login_pass" class="w3-input" type="password" placeholder="Password">
 			<input id="login_host" class="w3-input" type="text" placeholder="Host (es: http://host.com)">
+			<p class="legend">Progetti da visualizzare</p>
+			<input id="login_projects" class="w3-input" type="text" placeholder="Inserisci le Key separate da uno spazio">
 			<br>
 			<input id="login_done" class="w3-button w3-round w3-right bg-blue w3-hover-blue" type="submit" value="Accedi">
 			<br><br>
@@ -68,7 +70,7 @@
 	</section>
 	<section id="lock"></section>
 	<table id="content-table"></table>
-	
+
 	<div id="errormex"></div>
 	<div id="successmex"></div>
 </body>

@@ -143,3 +143,5 @@
   10:00 - 10:30 Aggiunta pulsanti di uscita ai popup
   10:30 - 11:30 Spostamento popup di aggiunta
   11:30 - 13:00 Spostamento scelta dei progetti nel login
+  14:00 - 15:30 Continuo sposatamento progetti nel login
+  

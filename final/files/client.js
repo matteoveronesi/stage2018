@@ -67,9 +67,7 @@ function refresh(sec,opt){
     var pass = localStorage.getItem("pass");
     var host = localStorage.getItem("host");
     var projects = localStorage.getItem("projects");
-    var projectsName = localStorage.getItem("projectsName");
     var table = $("#content-table");
-    var list = $(".selectProjects");
 
     if (opt == 1)
         $.ajax({
@@ -79,20 +77,10 @@ function refresh(sec,opt){
                 "user": user,
                 "pass": pass,
                 "host": host,
-                "projects": projects,
-                "projectsName": projectsName
+                "projects": projects
             },
             success: function(res){
                 table.html(res);
-                list.html("<h6>Progetti da visualizzare</h6>");
-
-                JSON.parse(projects).forEach(function(p,i){
-                    var tr = $("#"+p);
-                    var toggle = "$('#"+p+"').toggle();"
-
-                    if (table.html().search(p) != -1)
-                        list.html(list.html()+'<input type="checkbox" checked="checked" onclick="'+toggle+' '+tr.attr("onclick")+'"> '+JSON.parse(projectsName)[i]+'<br>');
-                });
             },
             error: function(err){
                 console.log(err);
@@ -107,8 +95,7 @@ function refresh(sec,opt){
                 "user": user,
                 "pass": pass,
                 "host": host,
-                "projects": projects,
-                "projectsName": projectsName
+                "projects": projects
             },
             success: function(res){
                 table.html(res);
@@ -127,7 +114,6 @@ function getUserData(){
         var user = localStorage.getItem("user");
         if (user){
             var name = localStorage.getItem("name");
-            var pass = localStorage.getItem("pass");
             var host = localStorage.getItem("host");
 
             $(".user_avatar").prop("src", host+"/secure/useravatar?ownerId="+user);
@@ -144,22 +130,22 @@ function setUserData(){
     var user = $("#login_user").val();
     var pass = $("#login_pass").val();
     var host = $("#login_host").val();
+    var projectsList = $("#login_projects").val();
+    var projects = projectsList.split(" ");
 
-    if (user.length > 0 && pass.length > 0 && host.length > 0){
+    if (user.length > 0 && pass.length > 0 && host.length > 0 && projectsList.length > 0){
         $.ajax({
             type: "POST",
             url: "/rest/login",
             data: {"user": user, "pass": pass, "host": host},
-            success: function(res){ //res = { nome utente, key progetti, nome progetti }
+            success: function(res){ //res = nome utente
                 $("#login_user").val("");
                 $("#login_pass").val("");
-                $("#login_host").val("");
                 $(".login-page").toggle();
-
-                localStorage.setItem("projects", JSON.stringify(res.projects));
-                localStorage.setItem("projectsName",  JSON.stringify(res.projectsName));
+                
+                localStorage.setItem("projects", JSON.stringify(projects));
                 localStorage.setItem("user", user);
-                localStorage.setItem("name", res.name);
+                localStorage.setItem("name", res);
                 localStorage.setItem("pass", pass);
                 localStorage.setItem("host", host);
                 location.reload();
@@ -170,7 +156,7 @@ function setUserData(){
             }
         });
     }
-    else showToast(0,"Compila tutti i campi.");
+    else //showToast(0,"Compila tutti i campi.");
 }
 
 function deleteUserData() {
@@ -179,7 +165,6 @@ function deleteUserData() {
     localStorage.removeItem("pass");
     localStorage.removeItem("host");
     localStorage.removeItem("projects");
-    localStorage.removeItem("projectsName");
 
     $(".user_avatar").prop("src","guest.svg");
     $(".user_avatar").prop("class","user_avatar");
@@ -208,6 +193,7 @@ function addIssue() {
             success: function(res){
                 console.log(res);
                 refresh(2,2);
+                showToast(1,"Issue aggiunta");
             },
             error: function(err){
                 console.log(err);
@@ -219,7 +205,7 @@ function addIssue() {
         summary.prop("value", "");
         summary.focus();
     }
-    else{}
+    else //showToast(0,"Titolo obbligatorio.");
 }
 
 function toggleProject(start,end,project){
@@ -276,7 +262,7 @@ function status(n){
          success: function(res){
              console.log(res);
              refresh(2);
-             showToast(1,key+" aggiornata");
+             showToast(1,key.text()+" aggiornata");
          },
          error: function(err){
              console.log(err);
@@ -319,7 +305,7 @@ function edit(n){
              success: function(res){
                  console.log(res);
                  refresh(2,2);
-                 showToast(1,key+" aggiornata");
+                 showToast(1,key.text()+" aggiornata");
              },
              error: function(err){
                  console.log(err);

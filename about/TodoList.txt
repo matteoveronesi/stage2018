@@ -10,10 +10,10 @@ Cose rimaste da fare e/o interessanti da fare ( 11/06 )
 Altre belle cose da fare ( 14/06 )
 
   FATTO - Spostare il pulsante di aggiunta di fianco al nome del progetto
-  - Implementare la possibilità di scegliere i progetti da includere nel login
+  FATTO - Implementare la possibilità di scegliere i progetti nel login
   FATTO - Spostare il pulsante di refresh in alto
   - Spostare i filtri in alto
   FATTO - Aggiungere un pulsante di uscita dai vari popup
   FATTO - Spostare il popup di aggiunta
-  - Cambiare l'icona del cestino
   FATTO - aggiungere dei feedback agli errori / chiamate andate a buon fine
+  - Cambiare l'icona del cestino (opt)
