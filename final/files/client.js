@@ -4,6 +4,14 @@ $(document).ready(function(){
 
     getUserData();
 
+    $(".exit-new-issue").click(function(){
+        $(".new-issue-focus").hide(10);
+    });
+
+    $(".exit-sidebar").click(function(){
+        $(".sidebar-focus").hide(10);
+    });
+
     $(".show-menu").click(function(){
         $(".sidebar-focus").toggle();
     });
@@ -28,17 +36,19 @@ $(document).ready(function(){
 
 function lock(n){
     $("#lock").show();
-    var t;
-    if (n) t = n;
-    else t = 2500; 
-    setTimeout(()=>$("#lock").hide(),t);
+    var sec;
+    if (n) sec = n;
+    else sec = 2500; 
+    setTimeout(()=>$("#lock").hide(),sec);
 }
 
 function openAdd(i){
     var projects = localStorage.getItem("projects");
     var project = JSON.parse(projects)[i];
+
+    $("#selectedProject span").text(project);
     $("#new-key").prop("value",project);
-    $("#iadd").toggle(100);
+    $(".new-issue-focus").show(10);
     $("#iadd").find("#new-name").focus();
 }
 
@@ -193,7 +203,7 @@ function addIssue() {
             }
         });
 
-        $("#iadd").toggle(100);
+        $(".new-issue-focus").hide(10);
         //key.prop("value", "");
         summary.prop("value", "");
     }

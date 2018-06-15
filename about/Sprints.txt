@@ -78,3 +78,14 @@ Sprints
   - Bugfix (logout, call spam) [FATTO]
   - Rimuovere i log [CANCELLED]
   - Completare la prima release [FATTO]
+
+14/06/2018 [DAY 19]
+
+  - Preparare presentazione [FATTO]
+  - Spostare pulsante refresh e aggiunta [FATTO]
+
+15/06/2018 [DAY 20]
+
+  - Bugfix conflitto filtri []
+  - Spostare la scelta dei progetti nel login e il popup di aggiunta []
+  - Aggiungere pulsanti di uscita ai popup []

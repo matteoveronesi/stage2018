@@ -136,3 +136,10 @@
   15:00 - 16:00 review finale
   16:00 - 17:00 parlottazzi con sossy e ila
   17:00 - 18:00 Spostamento pulsante di refresh
+
+15/06/2018 [DAY 20]
+
+  09:00 - 10:00 lezione con vale su limesurvey
+  10:00 - 10:30 Aggiunta pulsanti di uscita ai popup
+  10:30 - 11:30 Spostamento popup di aggiunta
+  11:30 - 13:00 Spostamento scelta dei progetti nel login

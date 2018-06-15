@@ -31,24 +31,56 @@ h6 img{
 }
 
 #iadd{
-	width: 100%;
+	background: #fff;
+	border-radius: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#selectedProject{
+	padding-left: 10px;
+	margin-top: 10px;	
 }
 
 #new-key{
 	display: none;
 }
 
-#new-name{
-	width: 370px;
+.exit-sidebar{
+	cursor: pointer;
+	position: fixed;
+	top: 40px;
+	right: 15px;
+	color: red;
 }
 
-#new-add{
-	position: absolute;
-	top: 8px;
-	left: 400px;
+.exit-new-issue{
+	cursor: pointer;
+	margin-top: 5px;
+	color: red;
 }
 
-div.selectProjects{
+.new-issue-focus{
+	z-index: 4;
+	display: none;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 15%;
+	background: rgba(0,0,0,0.3);
+}
+
+.version{
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+}
+.login-page .version{
+	color: #fff;
+}
+
+.selectProjects{
 	margin-top: 90px;
 }
 
@@ -76,7 +108,7 @@ div.selectProjects{
 	right: 0px;
 	left: 0px;
 	bottom: 0px;
-	z-index: 2;
+	z-index: 6;
 	padding: 15%;
 	background: #fff;
 	background: linear-gradient(to bottom right, #2C5364, #203A43);
@@ -89,7 +121,7 @@ div.selectProjects{
 }
 
 .sidebar-focus{
-	z-index: 1;
+	z-index: 3;
 	display: none;
 	position: fixed;
 	height: 100%;

@@ -53,3 +53,5 @@ https://loading.io
 https://uigradients.com
 
 https://htmlcolorcodes.com/
+
+https://socialtriggers.com/best-font-website/
