@@ -196,7 +196,7 @@ function setUserData(){
             }
         });
     }
-    //else showToast(0,"Compila tutti i campi.");
+    else showToast(0,"Compila tutti i campi.");
 }
 
 function deleteUserData() {
@@ -244,7 +244,7 @@ function addIssue() {
         //key.prop("value", "");
         summary.prop("value", "");
     }
-    //else showToast(0,"Titolo obbligatorio.");
+    else showToast(0,"Titolo obbligatorio.");
     
     summary.focus();
 }
