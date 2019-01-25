@@ -50,3 +50,11 @@
  #BUGFIX
 
   - [B007] Risolto bug per cui se si possiedono troppi progetti il software si blocca. 
+  
+  
+### RELEASE v1.1.1 ###
+
+ #FUNZIONALITÀ AGGIUNTE
+ 
+  - Miglioramenti grafici
+  - Altre modifiche tecniche
