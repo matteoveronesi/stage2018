@@ -4,8 +4,8 @@
   "description": "Issues Control Panel for Jira",
   "main": "app.js",
   "scripts": {
-    "wstart": "nodemon ./app.js",
-    "start": "clear && nodemon ./app.js"
+    "wrun": "nodemon ./app.js",
+    "lrun": "clear && nodemon ./app.js"
   },
   "author": "Matteo Veronesi",
   "license": "GPL-3.0-only",
